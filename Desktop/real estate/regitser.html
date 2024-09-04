@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+          <div>
+            <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="Logo" style="height: 70px; width: 70px;"></a>
+          </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Enter neighbourhood...">
+                <select>
+                  <option>-- Property type --</option>
+                  <option value="">House</option>
+                  <option value="">Apartments</option>
+                  <option value="">Land</option>
+                  <option value="">Hotel</option>
+                  <option value="">Resort</option>
+                  <option value="">Guest House</option>
+                  <option value="">Lodge</option>
+                  <option value="">Commercial</option>
+                  <option value="">Shored House</option>
+                </select>
+                <select>
+                    <option>Sale</option>
+                    <option>Rent</option>
+                </select>
+                <select>
+                    <option>Rwf</option>
+                    <option>USD</option>
+                    <option>Euro</option>
+                </select>
+                <input type="number" placeholder="Min: 0">
+                <input type="number" placeholder="Max: 500000">
+                <button class="search-btn">Search</button>
+            </div>
+            <div class="nav-links">
+                <a href="#">Request property</a>
+                <a href="#">Offer property</a>
+                <a href="login.html">Login</a>
+                <a href="regitser.html">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Register Form Section -->
+    <div class="register-container">
+        <div class="register-box">
+            <h2><i class="fas fa-user-plus"></i> Register</h2>
+            <form action="#">
+                <div class="input-group">
+                    <label for="name">Names</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">E-Mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="phone">Tel Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+250 788 668 243" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                <button type="submit" class="register-btn">Register</button>
+            </form>
+            <p>Already registered? <a href="login.html" class="login-link">Go to login</a></p>
+        </div>
+    </div>
+
+    <!-- FontAwesome CDN -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

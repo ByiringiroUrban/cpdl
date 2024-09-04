@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Properties</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Request Property</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Offer Property</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="login.html">Login</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="regitser.html">Register</a>
+              </li>
+          </ul>
+      </div>
+  </nav>
+    <div class="row">
+      <div class="navbar-div">
+        <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="Logo" style="height: 70px; width: 70px;"> Abahuza.com</a>
+      </div>
+         <div id="main" class="content">
+            <button class="openbtn" onclick="openSidebar()">&#9776;</button>
+        </div>
+        <div class="col-12">
+          <form class="form-inline mb-4" >
+              <input class="form-control mr-sm-2" type="search" placeholder="Enter neighbor...." aria-label="Search">
+              <select class="form-control mr-sm-2">
+                  <option>-- Property type --</option>
+                  <option value="">House</option>
+                  <option value="">Apartments</option>
+                  <option value="">Land</option>
+                  <option value="">Hotel</option>
+                  <option value="">Resort</option>
+                  <option value="">Guest House</option>
+                  <option value="">Lodge</option>
+                  <option value="">Commercial</option>
+                  <option value="">Shored House</option>
+              </select>
+              <select class="form-control mr-sm-2">
+                  <option>Sale</option>
+                  <option>Rent</option>
+              </select>
+              <select class="form-control mr-sm-2">
+                <option>Rfw</option>
+                <option>USD</option>
+            </select>
+              <input class="form-control mr-sm-2" type="number" placeholder="Min: 0" min="0">
+              <input class="form-control mr-sm-2" type="number" placeholder="Max: 500000" min="0">
+              <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+        <div id="sidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="#home" onclick="closeSidebar()">Home</a></li>
+                <li><a href="#about" onclick="closeSidebar()">About Us</a></li>
+                <li><a href="#custom-service" onclick="closeSidebar()">Custom Service</a></li>
+                <li><a href="#service-team" onclick="closeSidebar()">Service Team</a></li>
+                <li><a href="#partnership" onclick="closeSidebar()">Partnership</a></li>
+                <li><a href="#testimony" onclick="closeSidebar()">Custom Testimony</a></li>
+                <li><a href="#contact" onclick="closeSidebar()">Contact Us</a></li>
+            </ul>
+        </div>
+        
+    </div>
+  </header>
+                <!-- this is hero section -->
+
+    <div class="container mt-4">
+      
+        <div class="row text-center">
+            <div class="col-12">
+                <h2 class="mb-4">Real Estate Properties</h2>
+                <p style="color: gray;" >We have properties in these areas. View a list of featured properties.</p>
+            </div>
+                <div class="paragraph-rent-sale">
+                    <h6><a href="">LATEST</a></h6>
+                    <h6><a href="">SALE</a></h6>
+                    <h6><a href="">RENT</a></h6>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <a href=""><img src="images/image1.jpg" class="card-img-top" alt="Property 1"></a>
+                    <div class="card-body">
+                        <a href=""><h5 class="card-title text-primary">$1500/Per month</h5></a>
+                        <p class="card-text">Apartment at Gacuriro, Kigali</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">3 Bedrooms</li>
+                            <li class="list-group-item">3 Bathrooms</li>
+                            <li class="list-group-item">Furnished</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <a href=""><img src="images/image2.jpg" class="card-img-top" alt="Property 2"></a>
+                    <div class="card-body">
+                        <a href=""><h5 class="card-title text-primary">$600/Per month</h5></a>
+                        <p class="card-text">Apartment at Gacuriro, Kigali</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">2 Bedrooms</li>
+                            <li class="list-group-item">3 Bathrooms</li>
+                            <li class="list-group-item">Furnished</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <a href=""><img src="images/image3.jpg" class="card-img-top" alt="Property 3"></a>
+                    <div class="card-body">
+                        <a href=""><h5 class="card-title text-primary">$800/Per month</h5></a>
+                        <p class="card-text">House at Kibagabaga, Kigali</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">3 Bedrooms</li>
+                            <li class="list-group-item">2 Bathrooms</li>
+                            <li class="list-group-item">Furnished</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <a href=""><img src="images/image4.jpg" class="card-img-top" alt="Property 3"></a>
+                    <div class="card-body">
+                        <a href=""><h5 class="card-title text-primary">$800/Per month</h5></a>
+                        <p class="card-text">House at Kibagabaga, Kigali</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">3 Bedrooms</li>
+                            <li class="list-group-item">2 Bathrooms</li>
+                            <li class="list-group-item">Furnished</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <a href=""><img src="images/image5.jpg" class="card-img-top" alt="Property 3"></a>
+                    <div class="card-body">
+                        <a href=""><h5 class="card-title text-primary">$800/Per month</h5></a>
+                        <p class="card-text">House at Kibagabaga, Kigali</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">3 Bedrooms</li>
+                            <li class="list-group-item">2 Bathrooms</li>
+                            <li class="list-group-item">Furnished</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <a href=""><img src="images/image6.jpg" class="card-img-top" alt="Property 3"></a>
+                    <div class="card-body">
+                        <a href=""><h5 class="card-title text-primary">$800/Per month</h5></a>
+                        <p class="card-text">House at Kibagabaga, Kigali</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">3 Bedrooms</li>
+                            <li class="list-group-item">2 Bathrooms</li>
+                            <li class="list-group-item">Furnished</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <a href=""><img src="images/image7.jpg" class="card-img-top" alt="Property 3"></a>
+                    <div class="card-body">
+                        <a href=""><h5 class="card-title text-primary">$800/Per month</h5></a>
+                        <p class="card-text">House at Kibagabaga, Kigali</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">3 Bedrooms</li>
+                            <li class="list-group-item">2 Bathrooms</li>
+                            <li class="list-group-item">Furnished</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <a href=""><img src="images/image10.jpg" class="card-img-top" alt="Property 3"></a>
+                    <div class="card-body">
+                        <a href=""><h5 class="card-title text-primary">$800/Per month</h5></a>
+                        <p class="card-text">House at Kibagabaga, Kigali</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">3 Bedrooms</li>
+                            <li class="list-group-item">2 Bathrooms</li>
+                            <li class="list-group-item">Furnished</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <a href=""><img src="images/image9.jpg" class="card-img-top" alt="Property 3"></a>
+                    <div class="card-body">
+                        <a href=""><h5 class="card-title text-primary">$800/Per month</h5></a>
+                        <p class="card-text">House at Kibagabaga, Kigali</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">3 Bedrooms</li>
+                            <li class="list-group-item">2 Bathrooms</li>
+                            <li class="list-group-item">Furnished</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Intermediate section -->
+    <section class="three-columns">
+        <div class="column">
+            <img src="images/image11.jpg" alt="Buy Sell Rent">
+            <h3>Buy - Sell - Rent</h3>
+            <p>Have you ever been stressed by sourcing a perfect property for you? Have you ever been disappointed because of being taken to properties that are far from your criteria? Do you really need professional Real estate broker to assist you? If you really care your time, our team at ahabuza.com is passionate to locate and negotiate the acquisition of suitable property for you. Finding the perfect property, whether is Land, Residential, office or other commercial ... <a href="#">More</a></p>
+        </div>
+        <div class="column">
+            <img src="images/image10.jpg" alt="Services">
+            <h3>Services</h3>
+            <ul>
+                <li>Property Management</li>
+                <li>Property Valuation</li>
+                <li>Construction project study & Supervision</li>
+                <li>Building renovation and finishing</li>
+                <li>Aluminum and Gypsum partitioning</li>
+            </ul>
+            <p>If you are interested in one of our services, just contact us. Please Call or WhatsApp us on +250788668243. You can also drop by to our Office in Kigali City Center, Kacyiru, KG 647 st</p>
+        </div>
+        <div class="column">
+            <img src="images/image9.jpg" alt="Spirit at Abahuza.com">
+            <h3>Spirit at Abahuza.com</h3>
+            <p>Frankly, we do not settle for anything less than Perfection, however there is a long path. Now we’re not good enough but we learn how to be the best in what we do and we admit with self-honest when we’re wrong with courage to change. We don't value how long you stay at work or how hard you work; we care about accomplishing great work. It is not just working or getting the job with us. It ... <a href="#">More</a></p>
+        </div>
+    </section>
+
+
+                    <!-- footer section -->
+    <footer>
+        <div class="footer-top">
+            <h3>OUR PARTNERS</h3>
+            <a href=""><img src="images/logo.png" alt="Partner Logo"></a>
+        </div>
+
+        <div class="footer-bottom">
+            <nav class="footer-nav">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Customer Services</a>
+                <a href="#">Services Terms</a>
+                <a href="#">Partnership with Other Agents</a>
+                <a href="#">Customer Testimony</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Sitemap</a>
+            </nav>
+            <hr>
+            <div class="footer-info">
+                <p>Copyright @ 2024 ABAHUZA. All Rights Reserved.</p>
+                <p>Developed with <span>❤️</span> by <a href="#">Urban</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> Kigali city center - Kacyiru, KG 647 St</p>
+                <p><i class="fas fa-phone-alt"></i> +250 788 668 234</p>
+                <p><i class="fas fa-envelope"></i> byiringirourban20@gmail.com</p>
+            </div>
+            <div class="footer-social">
+                <p>Follow us:</p>
+                <a href="https://web.whatsapp.com/"><i class="fa-brands fa-whatsapp"><img src="images/social.png" alt=""></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100066577867585"><i class="fa-brands fa-facebook"><img src="images/facebook.png" alt=""></i></a>
+                <a href="https://www.instagram.com/grazia_apartments_rwanda1/"><i class="fa-brands fa-instagram"><img src="images/instagram.png" alt=""></i></a>
+                <a href="https://x.com/urbanpac20"><i class="fa-brands fa-x-twitter"><img src="images/twitter.png" alt=""></i></a>
+                <a href="https://telegram.org/"><i class="fa-brands fa-telegram"><img src="images/telegram.png" alt=""></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
