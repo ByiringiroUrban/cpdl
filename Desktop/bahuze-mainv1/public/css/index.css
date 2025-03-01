@@ -1,91 +1,154 @@
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #F5F5F5;
-  color: #333333;
-}
-
-/* Header */
+/* Header Styles */
 header {
-  background-color: #FF7F50;
-  color: white;
-  padding: 1px 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-}
-
-.logo{
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fda604;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1050;
 }
 
 .logo h1 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
 }
 
 nav ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  gap: 15px;
-  margin-right: 50px;
+  align-items: center;
+  gap: 20px;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+nav ul li {
+  display: inline-block;
 }
-nav a:hover{
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* Hover and Active State */
-.side-menu a:hover {
-  background-color: #FF7F50; /* Orange on hover */
-  color: white;
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
 }
 
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+.dropdown-toggle:hover {
+  color: #fff;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-name {
+  font-weight: 500;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: -5;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 160px;
+  padding: 8px 0;
+}
+
+.dropdown-menu li {
+  padding: 8px 16px;
+}
+
+.dropdown-menu li a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-menu li hr {
+  margin: 4px 0;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
 
 /* Search Section */
 .search-section {
   background-color: #FF4500;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   justify-content: center;
+  align-items: center;
   position: fixed;
-  top: 52px;
+  top: 49px;
   width: 100%;
+  z-index: 1040;
 }
+
 .search-section img{
   width: 80px;
   margin-left: 2rem;
-
 }
 
 .search-container {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  gap: 4px; /* Space between elements */
+  gap: 8px;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  margin-left: 3rem;
 }
-
 
 .search-input, .dropdown, .price-input {
-  padding: 12px;
-  border: none;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  width: 11.5%;
+  width: 16%;
+  text-align: center;
 }
-
 
 .search-button {
   background-color: white;
@@ -98,51 +161,49 @@ nav a:hover{
 }
 
 .search-button:hover {
-  background-color:rgb(247, 244, 244);
+  background-color: rgb(247, 244, 244);
   color: black;
   font-size: 14px;
   font-weight: bold;
 }
+
 .menu-icon{
   width: 60px;
   margin-left: 10rem;
 }
 
-/* Side Menu with Orange Background */
+/* Side Menu */
 .side-menu {
-  height: 100%;          /* Full height */
-  width: 0;              /* Initial width is 0 (hidden) */
-  position: fixed;       /* Fixed position */
+  height: 100%;
+  width: 0;
+  position: fixed;
   top: 0;
-  right: 0;               /* Adjusted to start from the left side */
-  background-color: #FF7F50; /* Orange background color */
-  overflow-x: hidden;    /* Disable horizontal scrolling */
-  transition: 0.5s;      /* Smooth transition */
-  padding-top: 60px;     /* Padding at the top */
-  z-index: 1001;         /* Above other content */
+  right: 0;
+  background-color: #FF7F50;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 1001;
 }
 
-/* Menu Links with white text */
 .side-menu a {
   padding: 10px 15px;
   text-decoration: none;
   font-size: 18px;
-  color: white;          /* White text color */
+  color: white;
   display: block;
   transition: 0.3s;
 }
 
-/* Highlight the active menu item */
 .side-menu a:hover {
-  background-color: rgb(62, 62, 180) /* Slightly darker shade of orange */
+  background-color: rgb(62, 62, 180);
 }
 
-/* Close Button adjusted for left-side alignment */
 .close-btn {
   position: absolute;
   top: 10px;
   width: 20px;
-  left: 0; /* Adjusted to be on the left side */
+  left: 0;
   cursor: pointer;
   color: white;
 }

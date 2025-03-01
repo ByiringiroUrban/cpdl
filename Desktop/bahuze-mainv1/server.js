@@ -184,31 +184,19 @@ app.get("/login", (req, res) => res.render("login"));
 app.post("/login", upload.array(), async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log("🟢 Login request data:", req.body);
-
-    // Check if email exists
     const user = await User.findOne({ email });
-    if (!user) {
-      console.error("❌ Email not found:", email);
-      return res.status(400).json({ message: "Invalid email or password." }); // Send JSON response
+
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(400).json({ status: "error", message: "Invalid email or password." });
     }
 
-    // Compare entered password with hashed password in DB
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      console.error("❌ Password does not match for:", email);
-      return res.status(400).json({ message: "Invalid email or password." }); // Send JSON response
-    }
-
-    // Store user session
-    req.session.userId = user._id;
+    // Store user in session
     req.session.user = { id: user._id, fullName: user.fullName, email: user.email };
 
-    console.log("✅ Login successful for:", email);
-    res.status(200).json({ message: "Login successful!", redirectUrl: "/user/dashboard" }); // Send JSON response
+    res.status(200).json({ status: "success", message: "Login successful! Redirecting..." });
   } catch (error) {
     console.error("❌ Login Error:", error);
-    res.status(500).json({ message: "Error logging in." }); // Send JSON response
+    res.status(500).json({ status: "error", message: "Error logging in. Please try again." });
   }
 });
 
@@ -229,12 +217,12 @@ app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error("❌ Logout Error:", err);
-      return res.scale(500).send("Error logging out.");
+      return res.status(500).json({ status: "error", message: "Error logging out." });
     }
-    res.redirect("/login");
+    res.clearCookie("connect.sid"); // Clear the session cookie
+    res.redirect("/login"); // Redirect to the home page
   });
 });
-
 // ✅ Middleware to Protect Routes (Authentication)
 const authMiddleware = (req, res, next) => {
   if (!req.session.userId) {
@@ -262,57 +250,55 @@ app.use("/uploads", express.static("uploads"));
 // Define Routes
 app.get("/", async (req, res) => {
   try {
-      const page = parseInt(req.query.page) || 1; // Get current page from query, default to 1
-      const limit = 8; // Limit to 8 properties per page
-      const skip = (page - 1) * limit; // Calculate the number of documents to skip
+    const page = Number(req.query.page) || 1;
+    const limit = 8;
+    const skip = (page - 1) * limit;
 
-      // Get the filter type from query parameters
-      const filter = req.query.type || ''; // Default to empty if no filter
-      const neighborhood = req.query.neighborhood || ''; // Get neighborhood from query
-      const scale = req.query.scale || ''; // Get scale (Rent/Sale) from query
-      const minPrice = req.query.minPrice ? parseFloat(req.query.minPrice) : 0; // Minimum price
-      const maxPrice = req.query.maxPrice ? parseFloat(req.query.maxPrice) : Infinity; // Maximum price
+    const filter = req.query.type || "";
+    const neighborhood = req.query.neighborhood || "";
+    const scale = req.query.scale || "";
+    const minPrice = req.query.minPrice ? parseFloat(req.query.minPrice) : 0;
+    const maxPrice = req.query.maxPrice ? parseFloat(req.query.maxPrice) : Infinity;
 
-      // Build the filter object
-      const filterObj = {};
-      if (filter) {
-          filterObj.type = filter; // Filter by property type
-      }
-  
-      if (scale) {
-          filterObj.type = scale; // Assuming 'type' is used for both Rent/Sale
-      }
-      if (minPrice || maxPrice < Infinity) {
-          filterObj.price = {};
-          if (minPrice) filterObj.price.$gte = minPrice;
-          if (maxPrice < Infinity) filterObj.price.$lte = maxPrice;
-      }
+    const filterObj = {};
+    if (filter) filterObj.type = filter;
+    if (scale) filterObj.scale = scale; // Use correct field
+    if (minPrice > 0 || maxPrice < Infinity) {
+      filterObj.price = {};
+      if (minPrice > 0) filterObj.price.$gte = minPrice;
+      if (maxPrice < Infinity) filterObj.price.$lte = maxPrice;
+    }
 
-      // Find properties based on the filter
-      const properties = await Property.find(filterObj).skip(skip).limit(limit);
-      const totalProperties = await Property.countDocuments(filterObj); // Get total number of properties
-      const totalPages = Math.ceil(totalProperties / limit); // Calculate total pages
+    const properties = await Property.find(filterObj).skip(skip).limit(limit);
+    const totalProperties = await Property.countDocuments(filterObj);
+    const totalPages = Math.max(1, Math.ceil(totalProperties / limit));
 
-      // Fetch unique property types for dropdown
-      const propertyTypes = await Property.distinct("type");
-      const propertyhousetype = await Property.distinct("housetype");
-      const propertyLocation = await Property.distinct("location");
-      res.render("index", { 
-          properties, 
-          currentPage: page, 
-          totalPages, 
-          filter, 
-          propertyLocation,
-          minPrice, 
-          maxPrice,
-          propertyTypes,
-          propertyhousetype
-      }); // Pass properties and pagination data to the view
+    const propertyTypes = await Property.distinct("type");
+    const propertyhousetype = await Property.distinct("housetype");
+    const propertyLocation = await Property.distinct("location");
+
+    // Get the user from the session
+    const user = req.session.user || null;
+
+    res.render("index", {
+      properties,
+      currentPage: page,
+      totalPages,
+      filter,
+      scale,
+      propertyLocation,
+      minPrice,
+      maxPrice,
+      propertyTypes,
+      propertyhousetype,
+      user, // Pass the user object to the template
+    });
   } catch (error) {
-      console.error("❌ Error fetching properties:", error);
-      res.scale(500).send("Error loading properties");
+    console.error("❌ Error fetching properties:", error);
+    res.status(500).send("Error loading properties");
   }
 });
+
 
 app.get("/register", (req, res) => res.render("register"));
 app.get("/addPropertie", (req, res) => res.render("addPropertie"));
