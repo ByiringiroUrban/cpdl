@@ -307,13 +307,13 @@ app.get("/offer-property", (req, res) => res.render("offer-property"));
 app.get("/sidebar/dashboard", authMiddleware, (req, res) => res.render("index2"));
 
 // ✅ Protected Profile Route
-app.get("/user/dashboard", authMiddleware, async (req, res) => {
+app.get("/user-dashboard", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.session.userId);
     if (!user) return res.redirect("/login"); // Redirect to login if user not found
 
     // Render the user dashboard with user data
-    res.render("userDashboard", {
+    res.render("user-dashboard", {
       fullName: user.fullName,
       image: user.image,
       tel: user.tel,
@@ -326,10 +326,7 @@ app.get("/user/dashboard", authMiddleware, async (req, res) => {
 });
 
 
-
 // add propertie
-
-
 
 app.post("/add-property", upload.array("images", 5), async (req, res) => {
   try {

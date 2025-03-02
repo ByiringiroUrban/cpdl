@@ -1,29 +1,29 @@
 <header>
-    <div class="logo">
-      <h1>Bahuze</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="/request-property">Request Property</a></li>
-        <li><a href="/offer-property">| Offer Property</a></li>
-        <% if (user) { %>
-          <!-- User is logged in: Show user profile dropdown -->
-          <li class="dropdown">
-            <button class="dropdown-toggle">
-               <img src="<%= user.image || '/assets/img/app-icon-person-64.png' %>" alt="profile"> 
-            </button>
-            <ul class="dropdown-menu">
-              <li><a href="/user/properties">My Property</a></li>
-              <li><a href="/user/profile">Profile</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a href="/logout">Logout</a></li>
-            </ul>
-          </li>
-        <% } else { %>
-          <!-- User is not logged in: Show login and register links -->
-          <li><a href="/login">| 🔑Login</a></li>
-          <li><a href="/register">| 🔐Register</a></li>
-        <% } %>
-      </ul>
-    </nav>
-  </header>
+  <div class="logo">
+    <h1>Bahuze</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="/user-dashboard">Request Property</a></li>
+      <li><a href="/offer-property">Offer Property</a></li>
+      <% if (user) { %>
+        <!-- User is logged in: Show user profile dropdown -->
+        <li class="dropdown">
+          <button class="dropdown-toggle">
+            <img src="<%= user.image || '/assets/img/app-icon-person-64.png' %>" alt="profile" class="profile-image">
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="/user-dashboard">My Property</a></li>
+            <li><a href="/user-dashboard">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </li>
+      <% } else { %>
+        <!-- User is not logged in: Show login and register links -->
+        <li><a href="/login">🔑 Login</a></li>
+        <li><a href="/register">🔐 Register</a></li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
