@@ -304,6 +304,12 @@ app.get("/register", (req, res) => res.render("register"));
 app.get("/addPropertie", (req, res) => res.render("addPropertie"));
 app.get("/request-property", (req, res) => res.render("request-property"));
 app.get("/offer-property", (req, res) => res.render("offer-property"));
+app.get("/about", (req, res) => res.render("aboutUs"));
+app.get("/customer-service", (req, res) => res.render("customerService"));
+app.get("/service-teams", (req, res) => res.render("serviceTeams"));
+app.get("/partener", (req, res) => res.render("partener"));
+app.get("/customer-testimon", (req, res) => res.render("customerTestimony"));
+app.get("/contact", (req, res) => res.render("contactUs"));
 app.get("/sidebar/dashboard", authMiddleware, (req, res) => res.render("index2"));
 
 // ✅ Protected Profile Route
