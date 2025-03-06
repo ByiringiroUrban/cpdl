@@ -301,7 +301,7 @@ app.get("/", async (req, res) => {
 
 
 app.get("/register", (req, res) => res.render("register"));
-app.get("/addPropertie", (req, res) => res.render("addPropertie"));
+app.get("/add-property", (req, res) => res.render("add-property"));
 app.get("/request-property", (req, res) => res.render("request-property"));
 app.get("/offer-property", (req, res) => res.render("offer-property"));
 app.get("/about", (req, res) => res.render("aboutUs"));
