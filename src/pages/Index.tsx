@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import Navbar from '@/components/Navbar';
@@ -9,7 +8,15 @@ import ContactInfo from '@/components/ContactInfo';
 import TeamMember from '@/components/TeamMember';
 import AchievementCard from '@/components/AchievementCard';
 import DonationSection from '@/components/DonationSection';
-import { Globe, Users, Book } from 'lucide-react';
+import { Globe, Users, Book, ChevronLeft, ChevronRight } from 'lucide-react';
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from "@/components/ui/carousel";
+import { cn } from '@/lib/utils';
 
 const Index = () => {
   const { t } = useLanguage();
@@ -186,18 +193,33 @@ const Index = () => {
         </section>
         
         {/* Team Section */}
-        <section id="team" className="section-padding bg-gray-50">
+        <section id="team" className="section-padding bg-gray-50 py-20">
           <div className="container-custom">
             <SectionTitle title={t('team.title')} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {teamMembers.map((member, index) => (
-                <TeamMember 
-                  key={index}
-                  name={member.name} 
-                  role={member.role} 
-                  imageUrl={member.imageUrl} 
-                />
-              ))}
+            <div className="mt-10 max-w-7xl mx-auto px-4">
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                className="w-full"
+              >
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {teamMembers.map((member, index) => (
+                    <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                      <TeamMember
+                        name={member.name} 
+                        role={member.role} 
+                        imageUrl={member.imageUrl}
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="flex justify-center mt-8 gap-4">
+                  <CarouselPrevious className="relative static transform-none border-primary bg-white text-primary hover:bg-primary hover:text-white" />
+                  <CarouselNext className="relative static transform-none border-primary bg-white text-primary hover:bg-primary hover:text-white" />
+                </div>
+              </Carousel>
             </div>
           </div>
         </section>
