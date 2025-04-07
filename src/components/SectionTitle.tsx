@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { cn } from '@/lib/utils';
 
 interface SectionTitleProps {
   title: string;
@@ -9,7 +10,7 @@ interface SectionTitleProps {
 
 const SectionTitle: React.FC<SectionTitleProps> = ({ title, id, className }) => {
   return (
-    <div id={id} className={`mb-8 text-center ${className || ''}`}>
+    <div id={id} className={cn("mb-8 text-center", className)}>
       <h2 className="text-3xl font-bold text-gray-800 inline-block relative">
         {title}
         <span className="block h-1 w-24 bg-primary mt-2 mx-auto"></span>
