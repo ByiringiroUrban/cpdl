@@ -6,14 +6,38 @@ interface SectionTitleProps {
   title: string;
   id?: string;
   className?: string;
+  titleClassName?: string;
+  lineClassName?: string;
+  center?: boolean;
 }
 
-const SectionTitle: React.FC<SectionTitleProps> = ({ title, id, className }) => {
+const SectionTitle: React.FC<SectionTitleProps> = ({ 
+  title, 
+  id, 
+  className, 
+  titleClassName,
+  lineClassName,
+  center = true
+}) => {
   return (
-    <div id={id} className={cn("mb-10 text-center", className)}>
-      <h2 className="text-3xl font-bold text-gray-800 inline-block relative">
+    <div 
+      id={id} 
+      className={cn(
+        "mb-10", 
+        center ? "text-center" : "", 
+        className
+      )}
+    >
+      <h2 className={cn(
+        "text-3xl font-bold text-gray-800 inline-block relative",
+        titleClassName
+      )}>
         {title}
-        <span className="block h-1 w-24 bg-primary mt-3 mx-auto transform transition-all duration-300 hover:w-32 hover:bg-primary/80"></span>
+        <span className={cn(
+          "block h-1 w-24 bg-primary mt-3 transition-all duration-300 hover:w-32 hover:bg-primary/80",
+          center ? "mx-auto" : "",
+          lineClassName
+        )}></span>
       </h2>
     </div>
   );
