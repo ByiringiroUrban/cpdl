@@ -29,7 +29,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
       )}
     >
       <h2 className={cn(
-        "text-3xl font-bold text-gray-800 inline-block relative",
+        "text-3xl font-bold text-indigo-950 inline-block relative",
         titleClassName
       )}>
         {title}

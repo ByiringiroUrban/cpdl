@@ -23,64 +23,62 @@ const Index = () => {
 
   const teamMembers = [
     {
-      name: "Jacques Ntibarikure",
-      role: "General Coordinator",
+      name: "MONSIEUR JACQUES NTIBARIKURE",
+      role: "Coordinateur Général",
       imageUrl: "https://static.wixstatic.com/media/88ee31_4ea2559eb96746cf89e185bd34328b93~mv2.jpg/v1/crop/x_0,y_12,w_1168,h_1179/fill/w_624,h_630,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Jacques-Site-Web_edited.jpg"
     },
     {
-      name: "Nancy Roy",
-      role: "Volunteer for Elderly Care",
-      imageUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+      name: "MADAME NANCY ROY",
+      role: "Membre volontaire auprès des personnes âgées.",
+      imageUrl: "https://static.wixstatic.com/media/88ee31_7f95537f2e394b0894de9c610f20b409~mv2.jpeg/v1/crop/x_0,y_107,w_976,h_867/fill/w_710,h_630,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image%20site%20cpd%20canda.jpeg"
     },
     {
-      name: "Freddy Byamonyi",
-      role: "Executive Director (CPD East DRC)",
-      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+      name: "MADAME GORETTE KONYOLA",
+      role: "Membre volontaire",
+      imageUrl: "https://static.wixstatic.com/media/88ee31_f794c2a47edb4d3fa546bffaf3cbaeeb~mv2.jpg/v1/fill/w_631,h_552,al_c,q_80,enc_avif,quality_auto/Goreth-site-Jacques_edited_edited.jpg"
+    },
+   
+    {
+      name: "MADAME DIANE GOSSAN",
+      role: "Présidente du conseil d'administration",
+      imageUrl: "https://static.wixstatic.com/media/88ee31_ef8f7c1434624f9e8713836c5a9ea10b~mv2.jpeg/v1/fill/w_720,h_630,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202020-07-16%20at%2011_13_47_jp.jpeg"
     },
     {
-      name: "Team Member 4",
-      role: "Peace Education",
-      imageUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+      name: "MONSIEUR PIERRE NIYONKURU",
+      role: "Directeur Administratif et chargé de la communication",
+      imageUrl: "https://static.wixstatic.com/media/88ee31_8be619dbbe20443e877b6907e7c496c7~mv2.jpeg/v1/crop/x_0,y_0,w_640,h_560/fill/w_734,h_639,al_c,lg_1,q_85,enc_avif,quality_auto/WhatsApp%20Image%202020-07-16%20at%2011_14_51_jp.jpeg"
     },
     {
-      name: "Team Member 5",
-      role: "Youth Development",
-      imageUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+      name: "MADAME ROSE CHOUNMELE",
+      role: "Membre responsable de la pôle thématique d'Action sociale",
+      imageUrl: "https://static.wixstatic.com/media/88ee31_ec91c9433a3748cd8460d1129b75d093~mv2.jpeg/v1/crop/x_0,y_160,w_1200,h_1050/fill/w_720,h_630,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rose1.jpeg"
     },
     {
-      name: "Team Member 6",
-      role: "ICT Training Coordinator",
-      imageUrl: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+      name: "MONSIEUR ADOLPHE GATORE ND",
+      role: "Membre responsable adjoint de la pôle thématique d'Action sociale",
+      imageUrl: "https://static.wixstatic.com/media/88ee31_088b1c596ad749999deac6de2ad3a114~mv2.jpeg/v1/crop/x_0,y_275,w_1200,h_1050/fill/w_720,h_630,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Photo-Adolphe.jpeg"
     },
     {
-      name: "Team Member 7",
-      role: "Volunteer Coordinator",
-      imageUrl: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-    },
-    {
-      name: "Team Member 8",
-      role: "Fundraising Specialist",
-      imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-    },
-    {
-      name: "Team Member 9",
-      role: "Community Outreach",
-      imageUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+      name: "MONSIEUR JEAN PIERRE NGANYIRA",
+      role: "En charge  des projets et de la mobilisation des ressources",
+      imageUrl: "https://static.wixstatic.com/media/88ee31_65560d2380ed4539a55fb3d2d983a61f~mv2.jpeg/v1/crop/x_0,y_90,w_720,h_630/fill/w_720,h_630,al_c,q_85,enc_avif,quality_auto/Jean-Pierre.jpeg"
+    }, {
+      name: "MADAME NANCY CÔTÉ",
+      role: "Conseil d'administration",
+      imageUrl: "https://static.wixstatic.com/media/88ee31_19cdb02a60b44a1689de0dace4542c14~mv2.jpeg/v1/crop/x_66,y_0,w_636,h_650/fill/w_617,h_630,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Nancy%20C%C3%B4t%C3%A9-Gimp.jpeg"
     }
   ];
 
   const goalImages = [
     {
-      url: "https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+      url: "https://static.wixstatic.com/media/88ee31_adfe032a47704a5a85f5488564b72702~mv2.jpg/v1/crop/x_0,y_106,w_1919,h_1133/fill/w_1035,h_611,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/people-3140100_1920.jpg",
       alt: "Elderly support"
     },
     {
-      url: "https://images.unsplash.com/photo-1469041797191-50ace28483c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
-      alt: "Fighting violence"
+      url: "https://static.wixstatic.com/media/88ee31_e68b8c93b30e4f8c86cabd1106a5ab42~mv2.jpg/v1/fill/w_459,h_690,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/unsplash-old-woman.jpg"
     },
     {
-      url: "https://images.unsplash.com/photo-1485833077593-4278bba3f11f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
-      alt: "Youth education"
+      url: "https://static.wixstatic.com/media/88ee31_36511b399fad413bb21942bad2234a56~mv2.jpg/v1/fill/w_477,h_690,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/88ee31_36511b399fad413bb21942bad2234a56~mv2.jpg"
     }
   ];
 
@@ -93,7 +91,7 @@ const Index = () => {
         <Hero />
         
         {/* Presentation Section */}
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-secondary">
           <div className="container-custom">
             <SectionTitle title={t('presentation.title')} />
             <div className="max-w-4xl mx-auto">
@@ -104,7 +102,7 @@ const Index = () => {
         </section>
         
         {/* Objectives Section */}
-        <section id="objectives" className="section-padding bg-gray-50">
+        <section id="objectives" className="section-padding bg-gray-300">
           <div className="container-custom">
             <SectionTitle title={t('objectives.title')} />
             <div className="max-w-4xl mx-auto">
@@ -171,7 +169,7 @@ const Index = () => {
         </section>
         
         {/* Fields of Action Section */}
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-secondary-foreground">
           <div className="container-custom">
             <SectionTitle title={t('fields.title')} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -183,8 +181,8 @@ const Index = () => {
                 />
               </div>
               <div>
-                <p className="text-gray-700 mb-4">{t('fields.content')}</p>
-                <p className="text-gray-700">
+                <p className="text-gray-400 mb-4">{t('fields.content')}</p>
+                <p className="text-gray-400">
                   The Colony of Development Pioneers' scope of action is the entire territory of Quebec, in Canada and abroad where its objectives are justified. In Africa, activities are concentrated in the Democratic Republic of Congo and Burundi.
                 </p>
               </div>
@@ -225,7 +223,7 @@ const Index = () => {
         </section>
         
         {/* Achievements Section */}
-        <section id="achievements" className="section-padding bg-white">
+        <section id="achievements" className="section-padding bg-gray-400">
           <div className="container-custom">
             <SectionTitle title={t('achievements.title')} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -331,7 +329,7 @@ const Index = () => {
         </section>
         
         {/* Contact and News Section */}
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-gray-500">
           <div className="container-custom">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <ContactInfo />

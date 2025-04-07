@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { Link } from 'react-router-dom';
@@ -14,14 +13,14 @@ const Navbar: React.FC = () => {
   };
 
   const navItems = [
-    { key: 'nav.home', href: '/#home', isExternal: false },
-    { key: 'nav.objectives', href: '/#objectives', isExternal: false },
-    { key: 'nav.team', href: '/#team', isExternal: false },
-    { key: 'nav.achievements', href: '/#achievements', isExternal: false },
-    { key: 'nav.information', href: '/#information', isExternal: false },
-    { key: 'nav.reports', href: '/#reports', isExternal: false },
-    { key: 'nav.donation', href: '/#donation', isExternal: false },
-    { key: 'nav.contact', href: '/contact', isExternal: false },
+    { key: 'nav.home', href: '#home', isExternal: true },
+    { key: 'nav.objectives', href: '#objectives', isExternal: true },
+    { key: 'nav.team', href: '#team', isExternal: true },
+    { key: 'nav.achievements', href: '#achievements', isExternal: true },
+    { key: 'nav.information', href: '#information', isExternal: true },
+    { key: 'nav.reports', href: '#reports', isExternal: true },
+    { key: 'nav.donation', href: '#donation', isExternal: true },
+    { key: 'nav.contact', href: '/contact', isExternal: false }, // page route
   ];
 
   return (
