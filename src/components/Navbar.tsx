@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LanguageToggle from './LanguageToggle';
 import { Menu, X, LayoutDashboard } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,7 +11,17 @@ const Navbar: React.FC = () => {
   const { t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
+  
+  // Create a safe version of useLocation
+  const safeUseLocation = () => {
+    try {
+      return useLocation();
+    } catch (error) {
+      return { pathname: '/' };
+    }
+  };
+  
+  const location = safeUseLocation();
 
   useEffect(() => {
     const handleScroll = () => {
