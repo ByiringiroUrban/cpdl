@@ -8,7 +8,10 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import translations from "@/data/translations";
 import Index from "./pages/Index";
 import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import Chatbot from "./components/Chatbot";
+import { AnimatePresence } from "framer-motion";
 
 const queryClient = new QueryClient();
 
@@ -19,12 +22,16 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/contact" element={<Contact />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AnimatePresence>
+          <Chatbot />
         </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>

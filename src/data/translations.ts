@@ -1,4 +1,3 @@
-
 const translations = {
   // Navigation
   'nav.home': {
@@ -28,6 +27,14 @@ const translations = {
   'nav.donation': {
     en: 'Make a Donation',
     fr: 'Faire un Don',
+  },
+  'nav.contact': {
+    en: 'Contact',
+    fr: 'Contact',
+  },
+  'nav.dashboard': {
+    en: 'Dashboard',
+    fr: 'Tableau de Bord',
   },
 
   // Hero Section
@@ -223,6 +230,26 @@ const translations = {
     en: 'Address: 1901 Avenue Mailloux, Suite 104, Québec, Québec, Canada, G1J 4Z6',
     fr: 'Adresse: 1901 Avenue Mailloux, Suite 104, Québec, Québec, Canada, G1J 4Z6',
   },
+  'contact.form.name': {
+    en: 'Name',
+    fr: 'Nom',
+  },
+  'contact.form.email': {
+    en: 'Email',
+    fr: 'Email',
+  },
+  'contact.form.message': {
+    en: 'Message',
+    fr: 'Message',
+  },
+  'contact.form.submit': {
+    en: 'Send Message',
+    fr: 'Envoyer le Message',
+  },
+  'contact.form.success': {
+    en: 'Your message has been sent. We will get back to you soon!',
+    fr: 'Votre message a été envoyé. Nous vous répondrons bientôt!',
+  },
 
   // News Section
   'news.title': {
@@ -243,6 +270,26 @@ const translations = {
     en: '(In French Only)',
     fr: '(En français seulement)',
   },
+  'reports.add': {
+    en: 'Add New Report',
+    fr: 'Ajouter un Nouveau Rapport',
+  },
+  'reports.form.title': {
+    en: 'Report Title',
+    fr: 'Titre du Rapport',
+  },
+  'reports.form.description': {
+    en: 'Report Description',
+    fr: 'Description du Rapport',
+  },
+  'reports.form.file': {
+    en: 'Upload File',
+    fr: 'Télécharger le Fichier',
+  },
+  'reports.form.submit': {
+    en: 'Submit',
+    fr: 'Soumettre',
+  },
 
   // Donation Section
   'donation.title': {
@@ -256,6 +303,70 @@ const translations = {
   'donation.button': {
     en: 'Donate Now',
     fr: 'Faire un don maintenant',
+  },
+  'donation.other': {
+    en: 'Other Donation Types',
+    fr: 'Autres Types de Dons',
+  },
+  'donation.material': {
+    en: 'Material Donations',
+    fr: 'Dons Matériels',
+  },
+  'donation.volunteer': {
+    en: 'Volunteer Time',
+    fr: 'Temps Bénévole',
+  },
+  'donation.services': {
+    en: 'Professional Services',
+    fr: 'Services Professionnels',
+  },
+  'donation.food': {
+    en: 'Food Donations',
+    fr: 'Dons Alimentaires',
+  },
+  'donation.clothes': {
+    en: 'Clothing Donations',
+    fr: 'Dons de Vêtements',
+  },
+
+  // Dashboard
+  'dashboard.title': {
+    en: 'Dashboard',
+    fr: 'Tableau de Bord',
+  },
+  'dashboard.reports': {
+    en: 'Manage Reports',
+    fr: 'Gérer les Rapports',
+  },
+  'dashboard.donations': {
+    en: 'Donation Overview',
+    fr: 'Aperçu des Dons',
+  },
+  'dashboard.metrics': {
+    en: 'Key Metrics',
+    fr: 'Indicateurs Clés',
+  },
+  'dashboard.activity': {
+    en: 'Recent Activity',
+    fr: 'Activité Récente',
+  },
+
+  // Chatbot
+  'chatbot.title': {
+    en: 'Chat with Us',
+    fr: 'Discutez avec Nous',
+  },
+  'chatbot.placeholder': {
+    en: 'Type your message here...',
+    fr: 'Tapez votre message ici...',
+  },
+  'chatbot.send': {
+    en: 'Send',
+    fr: 'Envoyer',
+  },
+  'chatbot.greeting': {
+    en: 'Hello! How can I help you today?',
+    fr: 'Bonjour! Comment puis-je vous aider aujourd\'hui?',
   },
 
   // Footer

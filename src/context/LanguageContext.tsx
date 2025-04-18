@@ -1,5 +1,5 @@
 
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 type Language = 'en' | 'fr';
 
@@ -20,7 +20,12 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   children, 
   translations 
 }) => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('fr'); // Changed default to French
+
+  // Set language to French when component mounts
+  useEffect(() => {
+    setLanguage('fr');
+  }, []);
 
   const t = (key: string): string => {
     if (!translations[key]) {
