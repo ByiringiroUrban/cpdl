@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { PlusCircle, FileText, Upload, Calendar, Activity, DollarSign, Users } from 'lucide-react';
+import { PlusCircle, FileText, Upload, Calendar, Activity, DollarSign, Users, AlertTriangle, FileUp } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import { fetchReports, createReport, Report } from '@/services/reportsService';
@@ -90,13 +90,22 @@ const Dashboard: React.FC = () => {
     }
   });
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  
   const handleAddReport = () => {
     if (newReport.title.trim() === '') {
       toast.error("Veuillez entrer un titre pour le rapport");
       return;
     }
     
-    createReportMutation.mutate(newReport);
+    const formData = new FormData();
+    formData.append('title', newReport.title);
+    formData.append('content', newReport.content);
+    if (selectedFile) {
+      formData.append('file', selectedFile);
+    }
+    
+    createReportMutation.mutate(formData);
   };
   
   return (
@@ -202,15 +211,18 @@ const Dashboard: React.FC = () => {
                             </CardHeader>
                             <CardContent>
                               <p className="text-sm text-gray-600">{report.content}</p>
+                              {report.fileUrl && (
+                                <a
+                                  href={`http://localhost:5000${report.fileUrl}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center mt-2 text-sm text-primary hover:underline"
+                                >
+                                  <FileText className="mr-1 h-4 w-4" />
+                                  {report.fileName}
+                                </a>
+                              )}
                             </CardContent>
-                            <CardFooter className="flex justify-between">
-                              <Button variant="outline" size="sm">
-                                Voir
-                              </Button>
-                              <Button variant="outline" size="sm">
-                                Télécharger
-                              </Button>
-                            </CardFooter>
                           </Card>
                         </motion.div>
                       ))
@@ -286,7 +298,7 @@ const Dashboard: React.FC = () => {
       
       {/* Add Report Dialog */}
       <Dialog open={isAddReportOpen} onOpenChange={setIsAddReportOpen}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
             <DialogTitle>{t('reports.add')}</DialogTitle>
             <DialogDescription>
@@ -312,17 +324,46 @@ const Dashboard: React.FC = () => {
                 onChange={(e) => setNewReport({...newReport, content: e.target.value})}
               />
             </div>
+
+            <div>
+              <Label htmlFor="file">Document (PDF, DOC, DOCX, TXT - max 10MB)</Label>
+              <div className="mt-2">
+                <Input
+                  id="file"
+                  type="file"
+                  onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                  accept=".pdf,.doc,.docx,.txt"
+                  className="cursor-pointer"
+                />
+              </div>
+              {selectedFile && (
+                <p className="text-sm text-muted-foreground mt-2">
+                  Fichier sélectionné: {selectedFile.name}
+                </p>
+              )}
+            </div>
           </div>
           
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsAddReportOpen(false)}>
+            <Button variant="outline" onClick={() => {
+              setIsAddReportOpen(false);
+              setSelectedFile(null);
+              setNewReport({ title: '', content: '' });
+            }}>
               Annuler
             </Button>
             <Button 
               onClick={handleAddReport}
               disabled={createReportMutation.isPending}
             >
-              {createReportMutation.isPending ? "Envoi..." : t('reports.form.submit')}
+              {createReportMutation.isPending ? (
+                <>
+                  <FileUp className="mr-2 h-4 w-4 animate-bounce" />
+                  Envoi en cours...
+                </>
+              ) : (
+                t('reports.form.submit')
+              )}
             </Button>
           </DialogFooter>
         </DialogContent>

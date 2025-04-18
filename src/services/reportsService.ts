@@ -9,6 +9,8 @@ export interface Report {
   title: string;
   content: string;
   createdAt: string;
+  fileUrl?: string;
+  fileName?: string;
 }
 
 // Get all reports
@@ -22,10 +24,14 @@ export const fetchReports = async (): Promise<Report[]> => {
   }
 };
 
-// Create a new report
-export const createReport = async (reportData: { title: string; content: string }): Promise<Report> => {
+// Create a new report with file
+export const createReport = async (formData: FormData): Promise<Report> => {
   try {
-    const response = await axios.post(`${API_URL}/reports`, reportData);
+    const response = await axios.post(`${API_URL}/reports`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return response.data;
   } catch (error) {
     console.error('Error creating report:', error);
