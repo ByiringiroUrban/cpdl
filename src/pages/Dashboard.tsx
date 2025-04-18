@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import { fetchReports, createReport, Report } from '@/services/reportsService';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { fetchStats, fetchDonations } from '@/services/donationsService';
 
 // Sample data for the dashboard
 const recentActivity = [
@@ -75,6 +76,16 @@ const Dashboard: React.FC = () => {
     queryFn: fetchReports
   });
   
+  const { data: stats } = useQuery({
+    queryKey: ['stats'],
+    queryFn: fetchStats
+  });
+
+  const { data: donations } = useQuery({
+    queryKey: ['donations'],
+    queryFn: fetchDonations
+  });
+
   // Create report mutation
   const createReportMutation = useMutation({
     mutationFn: createReport,
@@ -107,6 +118,28 @@ const Dashboard: React.FC = () => {
     
     createReportMutation.mutate(formData);
   };
+
+    // Replace hardcoded data with real data in the cards
+    const statsCards = [
+      {
+        title: "Rapports Totaux",
+        value: reports?.length || 0,
+        icon: FileText,
+        description: "Mis à jour en temps réel"
+      },
+      {
+        title: "Dons Totaux (CAD)",
+        value: `$${stats?.totalDonations || 0}`,
+        icon: DollarSign,
+        description: `${stats?.monthlyGrowth > 0 ? '+' : ''}${stats?.monthlyGrowth || 0}% depuis le dernier mois`
+      },
+      {
+        title: "Visiteurs",
+        value: stats?.visitors || 0,
+        icon: Users,
+        description: `${stats?.weeklyGrowth > 0 ? '+' : ''}${stats?.weeklyGrowth || 0}% depuis la semaine dernière`
+      }
+    ];
   
   return (
     <div className="min-h-screen flex flex-col">

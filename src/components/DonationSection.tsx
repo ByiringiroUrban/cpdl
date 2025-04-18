@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -23,6 +22,8 @@ import {
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { fetchStats, createDonation } from '@/services/donationsService';
 
 const DonationSection: React.FC = () => {
   const { t } = useLanguage();
@@ -32,6 +33,22 @@ const DonationSection: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [activeTab, setActiveTab] = useState("financial");
   const [selectedDonationType, setSelectedDonationType] = useState<string | null>(null);
+  
+  const queryClient = useQueryClient();
+  
+  const { data: stats } = useQuery({
+    queryKey: ['stats'],
+    queryFn: fetchStats
+  });
+
+  const createDonationMutation = useMutation({
+    mutationFn: createDonation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['donations', 'stats'] });
+      setIsDialogOpen(false);
+      toast.success("Merci pour votre don!");
+    }
+  });
   
   const handleDonationClick = () => {
     setIsDialogOpen(true);
@@ -45,23 +62,18 @@ const DonationSection: React.FC = () => {
   const handlePaymentSubmit = () => {
     setIsProcessing(true);
     
-    // Simulate payment processing
+    const donationData = {
+      type: activeTab === "financial" ? "financial" : "other",
+      amount: activeTab === "financial" ? selectedAmount : undefined,
+      donorName: (document.getElementById('name') as HTMLInputElement)?.value || 'Anonymous',
+      description: (document.getElementById('details') as HTMLTextAreaElement)?.value,
+      donationType: selectedDonationType
+    };
+
+    createDonationMutation.mutate(donationData);
+    
     setTimeout(() => {
       setIsProcessing(false);
-      setIsDialogOpen(false);
-      
-      // Show success message
-      if (activeTab === "financial") {
-        toast.success(`Merci pour votre don de ${selectedAmount}$!`, {
-          description: "Votre généreuse contribution nous aide à poursuivre notre mission."
-        });
-      } else {
-        toast.success(`Merci pour votre don de ${selectedDonationType}!`, {
-          description: "Votre généreuse contribution nous aide à poursuivre notre mission."
-        });
-      }
-      
-      // Reset selection
       setSelectedAmount(null);
       setSelectedPaymentMethod("card");
       setSelectedDonationType(null);

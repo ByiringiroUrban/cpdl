@@ -1,12 +1,12 @@
 
-// server.ts
-
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import path from 'path';
 import reportRoutes from './routes/reports';
+import donationRoutes from './routes/donations';
+import statsRoutes from './routes/stats';
 
 dotenv.config();
 
@@ -20,6 +20,8 @@ app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/reports', reportRoutes);
+app.use('/api/donations', donationRoutes);
+app.use('/api/stats', statsRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI || '')
