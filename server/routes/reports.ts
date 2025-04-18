@@ -46,9 +46,14 @@ router.post('/', upload.single('file'), async (req, res) => {
     });
     await report.save();
     res.status(201).json(report);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(400).json({ error: 'An unknown error occurred.' });
+    }
   }
 });
+
 
 export default router;

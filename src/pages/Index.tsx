@@ -9,6 +9,7 @@ import TeamMember from '@/components/TeamMember';
 import AchievementCard from '@/components/AchievementCard';
 import DonationSection from '@/components/DonationSection';
 import ReportsSection from './ReportsSection';
+import { motion } from 'framer-motion';
 import { Globe, Users, Book, ChevronLeft, ChevronRight } from 'lucide-react';
 import { 
   Carousel, 
@@ -100,7 +101,19 @@ const Index = () => {
               <p className="text-gray-700 font-medium text-center">{t('presentation.motto')}</p>
             </div>
           </div>
+          <div className="flex justify-center item-center py-8">
+          <motion.a 
+                          href="/contact" 
+                          className="btn-primary"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                  Nous Approches
+          </motion.a>
+          </div>
         </section>
+
+
         
         {/* Objectives Section */}
         <section id="objectives" className="section-padding bg-gray-300">

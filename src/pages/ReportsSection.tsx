@@ -75,10 +75,15 @@ const ReportsSection: React.FC = () => {
                     <p className="text-sm text-gray-600 line-clamp-3">{report.content}</p>
                   </CardContent>
                   <CardFooter className="border-t pt-4">
-                    <Button variant="outline" size="sm" className="w-full">
-                      <FileText className="mr-2 h-4 w-4" />
-                      Voir le rapport
-                    </Button>
+                      <a
+                                    href={`http://localhost:5000${report.fileUrl}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center mt-2 text-sm text-primary hover:underline"
+                                  >
+                                    <FileText className="mr-1 h-4 w-4" />
+                                    {report.fileName}
+                      </a>
                   </CardFooter>
                 </Card>
               </motion.div>

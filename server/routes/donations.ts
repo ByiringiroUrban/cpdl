@@ -10,9 +10,14 @@ router.get('/', async (req, res) => {
   try {
     const donations = await Donation.find().sort({ createdAt: -1 });
     res.json(donations);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching donations' });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(400).json({ error: 'An unknown error occurred.' });
+    }
   }
+  
 });
 
 // Create new donation and update stats
@@ -37,9 +42,14 @@ router.post('/', async (req, res) => {
     }
 
     res.status(201).json(donation);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  }catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(400).json({ error: 'An unknown error occurred.' });
+    }
   }
+  
 });
 
 export default router;

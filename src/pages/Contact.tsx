@@ -18,7 +18,7 @@ const Contact = () => {
       <main className="flex-grow">
         <section className="py-20 bg-gray-50">
           <div className="container-custom">
-            <SectionTitle title={t('contact.pageTitle') || "Contact Us"} />
+            <SectionTitle title={ "Contact Us"} />
             
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
