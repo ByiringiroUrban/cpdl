@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -15,6 +14,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { PlusCircle, FileText, Upload, Calendar, Activity, DollarSign, Users } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
+import { fetchReports, createReport, Report } from '@/services/reportsService';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 // Sample data for the dashboard
 const recentActivity = [
@@ -61,32 +62,41 @@ const itemVariants = {
 const Dashboard: React.FC = () => {
   const { t } = useLanguage();
   const [isAddReportOpen, setIsAddReportOpen] = useState(false);
-  const [reports, setReports] = useState<Array<{ title: string; description: string; date: string }>>([
-    { title: "Rapport Annuel 2023", description: "Rapport des activités annuelles de la CPD", date: "2023-12-15" },
-    { title: "Bulletin Trimestriel Q1 2024", description: "Mise à jour des activités pour le premier trimestre", date: "2024-03-30" },
-  ]);
   
   // Form state
-  const [newReport, setNewReport] = useState({ title: '', description: '', file: null as File | null });
+  const [newReport, setNewReport] = useState({ title: '', content: '' });
   
+  // Setup React Query
+  const queryClient = useQueryClient();
+  
+  // Fetch reports
+  const { data: reports = [], isLoading, error } = useQuery({
+    queryKey: ['reports'],
+    queryFn: fetchReports
+  });
+  
+  // Create report mutation
+  const createReportMutation = useMutation({
+    mutationFn: createReport,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['reports'] });
+      setNewReport({ title: '', content: '' });
+      setIsAddReportOpen(false);
+      toast.success("Rapport ajouté avec succès!");
+    },
+    onError: (error) => {
+      console.error('Error creating report:', error);
+      toast.error("Erreur lors de l'ajout du rapport");
+    }
+  });
+
   const handleAddReport = () => {
     if (newReport.title.trim() === '') {
       toast.error("Veuillez entrer un titre pour le rapport");
       return;
     }
     
-    const today = new Date().toISOString().split('T')[0];
-    
-    setReports([...reports, { 
-      title: newReport.title, 
-      description: newReport.description,
-      date: today
-    }]);
-    
-    setNewReport({ title: '', description: '', file: null });
-    setIsAddReportOpen(false);
-    
-    toast.success("Rapport ajouté avec succès!");
+    createReportMutation.mutate(newReport);
   };
   
   return (
@@ -115,7 +125,7 @@ const Dashboard: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{reports.length}</div>
-                  <p className="text-xs text-muted-foreground">+2 ce mois</p>
+                  <p className="text-xs text-muted-foreground">Mis à jour en temps réel</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -168,29 +178,45 @@ const Dashboard: React.FC = () => {
                   </Button>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {reports.map((report, index) => (
-                    <motion.div key={index} variants={itemVariants}>
-                      <Card>
-                        <CardHeader>
-                          <CardTitle>{report.title}</CardTitle>
-                          <CardDescription>{report.date}</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-gray-600">{report.description}</p>
-                        </CardContent>
-                        <CardFooter className="flex justify-between">
-                          <Button variant="outline" size="sm">
-                            Voir
-                          </Button>
-                          <Button variant="outline" size="sm">
-                            Télécharger
-                          </Button>
-                        </CardFooter>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </div>
+                {isLoading ? (
+                  <div className="text-center py-8">Chargement des rapports...</div>
+                ) : error ? (
+                  <div className="text-center py-8 text-red-500">
+                    Erreur lors du chargement des rapports. Veuillez réessayer plus tard.
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {reports.length === 0 ? (
+                      <div className="col-span-2 text-center py-8 text-gray-500">
+                        Aucun rapport disponible. Ajoutez votre premier rapport !
+                      </div>
+                    ) : (
+                      reports.map((report) => (
+                        <motion.div key={report._id} variants={itemVariants}>
+                          <Card>
+                            <CardHeader>
+                              <CardTitle>{report.title}</CardTitle>
+                              <CardDescription>
+                                {new Date(report.createdAt).toLocaleDateString('fr-FR')}
+                              </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                              <p className="text-sm text-gray-600">{report.content}</p>
+                            </CardContent>
+                            <CardFooter className="flex justify-between">
+                              <Button variant="outline" size="sm">
+                                Voir
+                              </Button>
+                              <Button variant="outline" size="sm">
+                                Télécharger
+                              </Button>
+                            </CardFooter>
+                          </Card>
+                        </motion.div>
+                      ))
+                    )}
+                  </div>
+                )}
               </motion.div>
             </TabsContent>
             
@@ -279,36 +305,12 @@ const Dashboard: React.FC = () => {
             </div>
             
             <div>
-              <Label htmlFor="description">{t('reports.form.description')}</Label>
+              <Label htmlFor="content">{t('reports.form.description')}</Label>
               <Textarea 
-                id="description" 
-                value={newReport.description}
-                onChange={(e) => setNewReport({...newReport, description: e.target.value})}
+                id="content" 
+                value={newReport.content}
+                onChange={(e) => setNewReport({...newReport, content: e.target.value})}
               />
-            </div>
-            
-            <div>
-              <Label htmlFor="file">{t('reports.form.file')}</Label>
-              <div className="mt-1 flex items-center">
-                <label className="block w-full">
-                  <div className="flex items-center justify-center px-6 py-4 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-primary/50 transition-colors">
-                    <Upload className="h-5 w-5 mr-2 text-gray-500" />
-                    <span className="text-sm text-gray-500">
-                      {newReport.file ? newReport.file.name : "Cliquez pour choisir un fichier"}
-                    </span>
-                  </div>
-                  <input
-                    id="file"
-                    type="file"
-                    className="sr-only"
-                    onChange={(e) => {
-                      if (e.target.files && e.target.files[0]) {
-                        setNewReport({...newReport, file: e.target.files[0]});
-                      }
-                    }}
-                  />
-                </label>
-              </div>
             </div>
           </div>
           
@@ -316,8 +318,11 @@ const Dashboard: React.FC = () => {
             <Button variant="outline" onClick={() => setIsAddReportOpen(false)}>
               Annuler
             </Button>
-            <Button onClick={handleAddReport}>
-              {t('reports.form.submit')}
+            <Button 
+              onClick={handleAddReport}
+              disabled={createReportMutation.isPending}
+            >
+              {createReportMutation.isPending ? "Envoi..." : t('reports.form.submit')}
             </Button>
           </DialogFooter>
         </DialogContent>

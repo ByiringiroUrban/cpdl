@@ -8,6 +8,7 @@ import ContactInfo from '@/components/ContactInfo';
 import TeamMember from '@/components/TeamMember';
 import AchievementCard from '@/components/AchievementCard';
 import DonationSection from '@/components/DonationSection';
+import ReportsSection from './ReportsSection';
 import { Globe, Users, Book, ChevronLeft, ChevronRight } from 'lucide-react';
 import { 
   Carousel, 
@@ -344,16 +345,8 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Reports Section */}
-        <section id="reports" className="section-padding bg-gray-50">
-          <div className="container-custom">
-            <SectionTitle title={t('reports.title')} />
-            <p className="text-center text-gray-600 italic">{t('reports.note')}</p>
-            <div className="mt-8 text-center">
-              <p className="text-gray-700">Reports and publications will be available soon.</p>
-            </div>
-          </div>
-        </section>
+        {/* Reports Section - Using our new component */}
+        <ReportsSection />
         
         {/* Donation Section */}
         <DonationSection />
