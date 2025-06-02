@@ -66,7 +66,7 @@ const DonationSection: React.FC = () => {
     const donationType: "financial" | "other" = activeTab === "financial" ? "financial" : "other";
     
     const donationData = {
-      type: donationType,
+      type: donationType as "financial" | "other",
       amount: activeTab === "financial" ? selectedAmount : undefined,
       donorName: (document.getElementById('name') as HTMLInputElement)?.value || 'Anonymous',
       description: (document.getElementById('details') as HTMLTextAreaElement)?.value,
@@ -188,7 +188,7 @@ const DonationSection: React.FC = () => {
             <DialogTitle>
               {activeTab === "financial" 
                 ? t('donation.dialog.payment.title')
-                : t('donation.dialog.other.title', { type: selectedDonationType })}
+                : t('donation.dialog.other.title')}
             </DialogTitle>
             <DialogDescription>
               {activeTab === "financial" 
