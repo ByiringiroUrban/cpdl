@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,13 +14,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-<<<<<<< HEAD
     --primary: 180 100% 50%;
     --primary-foreground: 180 100% 10%;
-=======
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -31,13 +23,8 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-<<<<<<< HEAD
     --accent: 180 100% 95%;
     --accent-foreground: 180 100% 10%;
-=======
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -49,28 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-<<<<<<< HEAD
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-=======
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -84,13 +55,8 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-<<<<<<< HEAD
     --primary: 180 100% 50%;
     --primary-foreground: 180 100% 10%;
-=======
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -98,13 +64,8 @@
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-<<<<<<< HEAD
     --accent: 180 100% 95%;
     --accent-foreground: 180 100% 10%;
-=======
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -131,7 +92,6 @@
   body {
     @apply bg-background text-foreground;
   }
-<<<<<<< HEAD
 }
 
 @layer components {
@@ -272,6 +232,3 @@
     transform: scale(1);
   }
 }
-=======
-}
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
@@ -376,17 +375,6 @@ const Index = () => {
       </main>
       
       <Footer />
-=======
-// Update this page (the content is just a fallback if you fail to update the page)
-
-const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b
     </div>
   );
 };

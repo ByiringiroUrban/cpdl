@@ -2,7 +2,6 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
-import fs from 'fs';
 import Report from '../models/Report';
 
 const router = express.Router();
@@ -31,13 +30,8 @@ const upload = multer({
 
 // Get all reports
 router.get('/', async (req, res) => {
-  try {
-    const reports = await Report.find().sort({ createdAt: -1 });
-    res.json(reports);
-  } catch (error) {
-    console.error('Error fetching reports:', error);
-    res.status(500).json({ error: 'Error fetching reports' });
-  }
+  const reports = await Report.find().sort({ createdAt: -1 });
+  res.json(reports);
 });
 
 // Create new report with file upload
@@ -61,32 +55,5 @@ router.post('/', upload.single('file'), async (req, res) => {
   }
 });
 
-// Delete report
-router.delete('/:id', async (req, res) => {
-  try {
-    const report = await Report.findById(req.params.id);
-    if (!report) {
-      return res.status(404).json({ error: 'Report not found' });
-    }
-
-    // Delete associated file if it exists
-    if (report.fileUrl) {
-      const filePath = path.join(__dirname, '..', report.fileUrl);
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-      }
-    }
-
-    await Report.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Report deleted successfully' });
-  } catch (error: unknown) {
-    console.error('Error deleting report:', error);
-    if (error instanceof Error) {
-      res.status(400).json({ error: error.message });
-    } else {
-      res.status(400).json({ error: 'An unknown error occurred.' });
-    }
-  }
-});
 
 export default router;
