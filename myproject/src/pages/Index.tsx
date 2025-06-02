@@ -252,6 +252,10 @@ const Index = () => {
           </div>
         </section>
         
+        <section>
+
+        
+        </section>
         {/* Activities Section - New Section */}
         <section id="activities" className="section-padding bg-gray-50">
           <div className="container-custom">

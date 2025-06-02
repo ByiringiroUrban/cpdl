@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -11,14 +11,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { PlusCircle, FileText, Upload, Calendar, Activity, DollarSign, Users, AlertTriangle, FileUp } from 'lucide-react';
+import { PlusCircle, FileText, Upload, Calendar, Activity, DollarSign, Users, AlertTriangle, FileUp, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
-import { fetchReports, createReport, Report } from '@/services/reportsService';
+import { fetchReports, createReport, deleteReport, Report } from '@/services/reportsService';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchStats, fetchDonations } from '@/services/donationsService';
 
-// Sample data for the dashboard
 const recentActivity = [
   { id: 1, action: "Rapport annuel 2024 ajouté", date: "2024-04-15" },
   { id: 2, action: "Don de 500$ reçu", date: "2024-04-12" },
@@ -35,7 +34,6 @@ const donationData = [
   { name: 'Juin', amount: 1800 },
 ];
 
-// Container animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -46,7 +44,6 @@ const containerVariants = {
   }
 };
 
-// Item animation variants
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
@@ -63,14 +60,10 @@ const itemVariants = {
 const Dashboard: React.FC = () => {
   const { t } = useLanguage();
   const [isAddReportOpen, setIsAddReportOpen] = useState(false);
-  
-  // Form state
   const [newReport, setNewReport] = useState({ title: '', content: '' });
-  
-  // Setup React Query
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const queryClient = useQueryClient();
   
-  // Fetch reports
   const { data: reports = [], isLoading, error } = useQuery({
     queryKey: ['reports'],
     queryFn: fetchReports
@@ -86,7 +79,6 @@ const Dashboard: React.FC = () => {
     queryFn: fetchDonations
   });
 
-  // Create report mutation
   const createReportMutation = useMutation({
     mutationFn: createReport,
     onSuccess: () => {
@@ -101,8 +93,24 @@ const Dashboard: React.FC = () => {
     }
   });
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  
+  const deleteReportMutation = useMutation({
+    mutationFn: deleteReport,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['reports'] });
+      toast.success("Rapport supprimé avec succès!");
+    },
+    onError: (error) => {
+      console.error('Error deleting report:', error);
+      toast.error("Erreur lors de la suppression du rapport");
+    }
+  });
+
+  const handleDeleteReport = (reportId: string) => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer ce rapport ?")) {
+      deleteReportMutation.mutate(reportId);
+    }
+  };
+
   const handleAddReport = () => {
     if (newReport.title.trim() === '') {
       toast.error("Veuillez entrer un titre pour le rapport");
@@ -119,28 +127,27 @@ const Dashboard: React.FC = () => {
     createReportMutation.mutate(formData);
   };
 
-    // Replace hardcoded data with real data in the cards
-    const statsCards = [
-      {
-        title: "Rapports Totaux",
-        value: reports?.length || 0,
-        icon: FileText,
-        description: "Mis à jour en temps réel"
-      },
-      {
-        title: "Dons Totaux (CAD)",
-        value: `$${stats?.totalDonations || 0}`,
-        icon: DollarSign,
-        description: `${stats?.monthlyGrowth > 0 ? '+' : ''}${stats?.monthlyGrowth || 0}% depuis le dernier mois`
-      },
-      {
-        title: "Visiteurs",
-        value: stats?.visitors || 0,
-        icon: Users,
-        description: `${stats?.weeklyGrowth > 0 ? '+' : ''}${stats?.weeklyGrowth || 0}% depuis la semaine dernière`
-      }
-    ];
-  
+  const statsCards = [
+    {
+      title: "Rapports Totaux",
+      value: reports?.length || 0,
+      icon: FileText,
+      description: "Mis à jour en temps réel"
+    },
+    {
+      title: "Dons Totaux (CAD)",
+      value: `$${stats?.totalDonations || 0}`,
+      icon: DollarSign,
+      description: `${stats?.monthlyGrowth > 0 ? '+' : ''}${stats?.monthlyGrowth || 0}% depuis le dernier mois`
+    },
+    {
+      title: "Visiteurs",
+      value: stats?.visitors || 0,
+      icon: Users,
+      description: `${stats?.weeklyGrowth > 0 ? '+' : ''}${stats?.weeklyGrowth || 0}% depuis la semaine dernière`
+    }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -245,15 +252,26 @@ const Dashboard: React.FC = () => {
                             <CardContent>
                               <p className="text-sm text-gray-600">{report.content}</p>
                               {report.fileUrl && (
-                                <a
-                                  href={`http://localhost:5000${report.fileUrl}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center mt-2 text-sm text-primary hover:underline"
-                                >
-                                  <FileText className="mr-1 h-4 w-4" />
-                                  {report.fileName}
-                                </a>
+                                <div className="flex items-center justify-between mt-2">
+                                  <a
+                                    href={`http://localhost:5000${report.fileUrl}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center text-sm text-primary hover:underline"
+                                  >
+                                    <FileText className="mr-1 h-4 w-4" />
+                                    {report.fileName}
+                                  </a>
+                                  <Button 
+                                    variant="ghost" 
+                                    size="sm" 
+                                    onClick={() => handleDeleteReport(report._id)}
+                                    disabled={deleteReportMutation.isPending}
+                                    className="text-red-500 hover:text-red-700"
+                                  >
+                                    <Trash2 className="h-4 w-4" />
+                                  </Button>
+                                </div>
                               )}
                             </CardContent>
                           </Card>
@@ -329,7 +347,6 @@ const Dashboard: React.FC = () => {
         </div>
       </main>
       
-      {/* Add Report Dialog */}
       <Dialog open={isAddReportOpen} onOpenChange={setIsAddReportOpen}>
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>

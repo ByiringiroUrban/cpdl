@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 // API base URL - adapt if needed based on your environment
@@ -20,7 +19,26 @@ export const fetchReports = async (): Promise<Report[]> => {
     return response.data;
   } catch (error) {
     console.error('Error fetching reports:', error);
-    throw error;
+    throw new Error(error.response?.data?.message || 'Failed to fetch reports');
+  }
+};
+
+// Delete a report
+export const deleteReport = async (reportId: string): Promise<{ message: string }> => {
+  try {
+    const response = await axios.delete(`${API_URL}/reports/${reportId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}` // Add if using auth
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting report:', error);
+    throw new Error(
+      error.response?.data?.message || 
+      error.message || 
+      'Failed to delete report'
+    );
   }
 };
 
@@ -30,11 +48,15 @@ export const createReport = async (formData: FormData): Promise<Report> => {
     const response = await axios.post(`${API_URL}/reports`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${localStorage.getItem('token')}` // Add if using auth
       },
     });
     return response.data;
   } catch (error) {
     console.error('Error creating report:', error);
-    throw error;
+    throw new Error(
+      error.response?.data?.message || 
+      'Failed to create report. Please try again.'
+    );
   }
 };
