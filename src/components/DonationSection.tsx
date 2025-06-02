@@ -90,12 +90,10 @@ const DonationSection: React.FC = () => {
   ];
 
   const otherDonationTypes = [
-    { id: "material", name: t('donation.material'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.material.desc') },
-    { id: "volunteer", name: t('donation.volunteer'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.volunteer.desc') },
-    { id: "services", name: t('donation.services'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.services.desc') },
-    { id: "food", name: t('donation.food'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.food.desc') },
-    { id: "clothes", name: t('donation.clothes'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.clothes.desc') },
-  ];
+    { id: "material", name: "$50", icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.material.desc') },
+    { id: "volunteer", name: "$100", icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.material.desc') },
+    { id: "services", name: "$150", icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.material.desc') },
+  ]
 
   return (
     <section id="donation" className="section-padding bg-accent/50">
@@ -121,27 +119,26 @@ const DonationSection: React.FC = () => {
           </motion.p>
         </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full max-w-4xl mx-auto">
-          <TabsList className="grid grid-cols-2 mb-8">
-            <TabsTrigger value="financial">{t('donation.financial')}</TabsTrigger>
-            <TabsTrigger value="other">{t('donation.other')}</TabsTrigger>
-          </TabsList>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full max-w-4xl mt-3 mx-auto">
+         
           
           <TabsContent value="financial">
             <div className="text-center mb-8">
               <p className="text-gray-600 mb-4">
                 {t('donation.financial.subtitle')}
               </p>
+             <a href="https://www.paypal.com/donate/?hosted_button_id=7JPRADUYRJ3M2">
               <Button 
                 onClick={handleDonationClick}
                 className="mx-auto"
               >
                 <Heart className="mr-2 h-4 w-4" /> {t('donation.button')}
               </Button>
+              </a> 
             </div>
           </TabsContent>
           
-          <TabsContent value="other">
+          <TabsContent value="financial">
             <motion.div 
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
               initial="hidden"
@@ -160,18 +157,19 @@ const DonationSection: React.FC = () => {
                       <CardTitle className="text-center">{type.name}</CardTitle>
                     </CardHeader>
                     <CardContent className="text-center">
-                      {type.icon}
+                      
                       <p className="text-sm text-gray-600">
                         {type.description}
                       </p>
                     </CardContent>
                     <CardFooter className="flex justify-center">
-                      <Button 
+                     
+                      <a href="https://www.paypal.com/donate/?hosted_button_id=7JPRADUYRJ3M2"> <Button 
                         className="w-full"
                         onClick={() => handleOtherDonationClick(type.id)}
                       >
-                        {t('donation.learn.more')}
-                      </Button>
+                        {t('donation.button')}
+                      </Button></a>
                     </CardFooter>
                   </Card>
                 </motion.div>
@@ -182,7 +180,7 @@ const DonationSection: React.FC = () => {
       </div>
       
       {/* Payment Method Dialog */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>
@@ -301,7 +299,7 @@ const DonationSection: React.FC = () => {
             </Button>
           </DialogFooter>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </section>
   );
 };

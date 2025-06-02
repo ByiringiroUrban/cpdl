@@ -376,7 +376,7 @@ const translations = {
   },
   'donation.button': {
     en: 'Donate Now',
-    fr: 'Faire un don maintenant',
+    fr: 'Faire un don ',
   },
   'donation.financial': {
     en: 'Financial Donations',
@@ -395,8 +395,8 @@ const translations = {
     fr: 'Dons Matériels',
   },
   'donation.material.desc': {
-    en: 'Donate materials you no longer need',
-    fr: 'Faites don de matériel dont vous n\'avez plus besoin',
+    en: 'Solidarity, Peace, and Development for All',
+    fr: 'Solidarité, Paix et Développement pour Tous',
   },
   'donation.volunteer': {
     en: 'Volunteer Time',
@@ -509,8 +509,8 @@ const translations = {
 
   // Partners Section
   'partners.title': {
-    en: 'Trusted by Industry Leaders',
-    fr: 'Approuvé par les Leaders de l\'Industrie',
+    en: 'Our Parteners',
+    fr: 'Notre partenaires',
   },
   'partners.subtitle': {
     en: 'We collaborate with renowned organizations and institutions that share our commitment to making a positive impact in communities worldwide.',

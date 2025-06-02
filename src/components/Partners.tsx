@@ -9,45 +9,31 @@ const Partners = () => {
   
   const partners = [
     {
-      name: t('partners.un'),
-      logo: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
-      website: "https://www.un.org"
+      
+      logo: "https://www.francophonie.org/themes/francophonie/images/site-logo-francophonie.png",
+      website: "https://www.francophonie.org/"
     },
     {
-      name: t('partners.unicef'),
-      logo: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
-      website: "https://www.unicef.org"
+      
+      logo: "/image.png",
+      website: "https://iansa.org/"
     },
     {
-      name: t('partners.who'),
-      logo: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
-      website: "https://www.who.int"
+      
+      logo: "/image1.png",
+      website: "https://diplomatie.belgium.be/fr/propos/services-et-structure"
     },
     {
-      name: t('partners.redcross'),
-      logo: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
-      website: "https://www.redcross.ca"
+      
+      logo: "https://www.grip.org/wp-content/uploads/2023/10/grip1-300x181-1.jpg",
+      website: "https://www.grip.org/"
     },
     {
-      name: t('partners.peacecorps'),
-      logo: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
-      website: "https://www.peacecorps.gov"
+      
+      logo: "https://icanpeacework.org/wp-content/uploads/2024/03/mobile-logo.svg",
+      website: "https://icanpeacework.org/"
     },
-    {
-      name: t('partners.community'),
-      logo: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
-      website: "#"
-    },
-    {
-      name: t('partners.ida'),
-      logo: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
-      website: "#"
-    },
-    {
-      name: t('partners.education'),
-      logo: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
-      website: "#"
-    }
+    
   ];
 
   return (
@@ -64,25 +50,24 @@ const Partners = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-8 mb-12">
           {partners.map((partner, index) => (
             <motion.div
-              key={partner.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group"
             >
-              <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 border border-gray-100 hover:border-primary/20 h-32 flex items-center justify-center">
-                <img
+              <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-16 border border-gray-100 hover:border-primary/20 h-32 flex items-center justify-center">
+              <a href={partner.website}>  <img
                   src={partner.logo}
-                  alt={`${partner.name} logo`}
-                  className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 opacity-70 group-hover:opacity-100"
-                />
+                  alt={`logo`}
+                  className="max-w-full max-h-full object-contain  group-hover:grayscale-0 transition-all duration-300 opacity-70 group-hover:opacity-100"
+                /> </a>
               </div>
               <p className="text-center mt-3 text-sm font-medium text-gray-600 group-hover:text-primary transition-colors duration-300">
-                {partner.name}
+                {}
               </p>
             </motion.div>
           ))}

@@ -306,12 +306,12 @@ const Index = () => {
                   <p className="text-gray-700 mb-4">{t('peace.content')}</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     <img 
-                      src="https://images.unsplash.com/photo-1540553002-c69a97c29279?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                      src="https://www.international-alert.org/wp-content/uploads/2021/07/Peace-Education-Formal-Schools-People-Chain-EN-2020-social-share.png" 
                       alt="Peace Education" 
                       className="rounded-lg shadow-md w-full h-48 object-cover"
                     />
                     <img 
-                      src="https://images.unsplash.com/photo-1546773740-b8c43346ed72?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                      src="https://th.bing.com/th/id/R.08ef8766602b66a20a079e829de14833?rik=ewncvWzZddY29Q&riu=http%3a%2f%2f4.bp.blogspot.com%2f_KS9Ape0NjwY%2fTUIT0qbhKII%2fAAAAAAAABSE%2fK937ij7N_tQ%2fs1600%2fPAZ4.jpg&ehk=ADERVsnK43xD0drYGRnqdAu6RPzuAKFD61aTjSrQidk%3d&risl=&pid=ImgRaw&r=0" 
                       alt="Non-violence Education" 
                       className="rounded-lg shadow-md w-full h-48 object-cover"
                     />
@@ -337,7 +337,7 @@ const Index = () => {
                   <p className="text-gray-700 mb-4">{t('youth.content')}</p>
                   <div className="mt-4">
                     <img 
-                      src="https://images.unsplash.com/photo-1517486808906-6ca8b3f8e35f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" 
+                      src="https://th.bing.com/th/id/R.735576e7ce4266bd016eb50e980719a3?rik=UbKFroU4hss4Sw&pid=ImgRaw&r=0" 
                       alt="Youth Supervision" 
                       className="rounded-lg shadow-md w-full h-48 object-cover"
                     />

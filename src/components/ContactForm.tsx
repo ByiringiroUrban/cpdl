@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,20 +9,25 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { toast } from 'sonner';
+import { Send } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  email: z.string().email({ message: 'Please enter a valid email address.' }),
-  subject: z.string().min(5, { message: 'Subject must be at least 5 characters.' }),
-  message: z.string().min(10, { message: 'Message must be at least 10 characters.' }),
+  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
+  subject: z.string().min(2, { message: "Subject must be at least 2 characters" }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters" })
 });
 
-type FormValues = z.infer<typeof formSchema>;
+
+type FormData= z.infer<typeof formSchema>;
 
 const ContactForm: React.FC = () => {
   const { t } = useLanguage();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
   
-  const form = useForm<FormValues>({
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
@@ -32,12 +37,44 @@ const ContactForm: React.FC = () => {
     },
   });
   
-  const onSubmit = (data: FormValues) => {
-    console.log('Form data:', data);
+const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
     
-    // Simulate form submission
-    toast.success(t('contact.form.success'));
-    form.reset();
+    try {
+      // Send email using Email.js or a similar service
+      const response = await fetch("https://formsubmit.co/ajax/byiringirourban20@gmail.com", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          subject: data.subject,
+          message: data.message,
+          _subject: `New message from portfolio: ${data.subject}`
+        })
+      });
+      
+      if (response.ok) {
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for reaching out. I'll get back to you soon.",
+        });
+        form.reset();
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or contact me directly via email.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
@@ -108,9 +145,19 @@ const ContactForm: React.FC = () => {
             )}
           />
           
-          <Button type="submit" className="w-full">
-            {t('contact.form.submit')}
-          </Button>
+            <Button 
+                        type="submit" 
+                        className="w-full group" 
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? 
+                          "Sending..." : 
+                          <>
+                            Send Message
+                            <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                          </>
+                        }
+                      </Button>
         </form>
       </Form>
     </div>
@@ -118,3 +165,7 @@ const ContactForm: React.FC = () => {
 };
 
 export default ContactForm;
+function setIsSubmitting(arg0: boolean) {
+  throw new Error('Function not implemented.');
+}
+
