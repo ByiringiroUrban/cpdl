@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import Navbar from '@/components/Navbar';
@@ -16,23 +17,7 @@ import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import { fetchReports, createReport, deleteReport, Report } from '@/services/reportsService';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchStats, fetchDonations } from '@/services/donationsService';
-
-const recentActivity = [
-  { id: 1, action: "Rapport annuel 2024 ajouté", date: "2024-04-15" },
-  { id: 2, action: "Don de 500$ reçu", date: "2024-04-12" },
-  { id: 3, action: "Mise à jour du profil de l'organisation", date: "2024-04-10" },
-  { id: 4, action: "Nouveau partenariat ajouté", date: "2024-04-05" },
-];
-
-const donationData = [
-  { name: 'Jan', amount: 1200 },
-  { name: 'Fév', amount: 1900 },
-  { name: 'Mar', amount: 800 },
-  { name: 'Avr', amount: 1600 },
-  { name: 'Mai', amount: 2100 },
-  { name: 'Juin', amount: 1800 },
-];
+import { fetchStats, fetchDonations, incrementVisitor } from '@/services/donationsService';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -64,26 +49,32 @@ const Dashboard: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const queryClient = useQueryClient();
   
-  const { data: reports = [], isLoading, error } = useQuery({
+  const { data: reports = [], isLoading: reportsLoading, error: reportsError } = useQuery({
     queryKey: ['reports'],
     queryFn: fetchReports
   });
   
-  const { data: stats } = useQuery({
+  const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['stats'],
     queryFn: fetchStats
   });
 
-  const { data: donations } = useQuery({
+  const { data: donations = [], isLoading: donationsLoading } = useQuery({
     queryKey: ['donations'],
     queryFn: fetchDonations
   });
+
+  // Increment visitor count on dashboard visit
+  React.useEffect(() => {
+    incrementVisitor().catch(console.error);
+  }, []);
 
   const createReportMutation = useMutation({
     mutationFn: createReport,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['reports'] });
       setNewReport({ title: '', content: '' });
+      setSelectedFile(null);
       setIsAddReportOpen(false);
       toast.success("Rapport ajouté avec succès!");
     },
@@ -127,26 +118,55 @@ const Dashboard: React.FC = () => {
     createReportMutation.mutate(formData);
   };
 
-  const statsCards = [
-    {
-      title: "Rapports Totaux",
-      value: reports?.length || 0,
-      icon: FileText,
-      description: "Mis à jour en temps réel"
-    },
-    {
-      title: "Dons Totaux (CAD)",
-      value: `$${stats?.totalDonations || 0}`,
-      icon: DollarSign,
-      description: `${stats?.monthlyGrowth > 0 ? '+' : ''}${stats?.monthlyGrowth || 0}% depuis le dernier mois`
-    },
-    {
-      title: "Visiteurs",
-      value: stats?.visitors || 0,
-      icon: Users,
-      description: `${stats?.weeklyGrowth > 0 ? '+' : ''}${stats?.weeklyGrowth || 0}% depuis la semaine dernière`
-    }
-  ];
+  // Prepare donation chart data from real donations
+  const donationChartData = React.useMemo(() => {
+    if (!donations.length) return [];
+    
+    const monthlyData: { [key: string]: number } = {};
+    const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
+    
+    donations.forEach(donation => {
+      if (donation.type === 'financial' && donation.amount) {
+        const date = new Date(donation.createdAt);
+        const monthKey = months[date.getMonth()];
+        monthlyData[monthKey] = (monthlyData[monthKey] || 0) + donation.amount;
+      }
+    });
+    
+    return months.map(month => ({
+      name: month,
+      amount: monthlyData[month] || 0
+    }));
+  }, [donations]);
+
+  // Generate recent activity from real data
+  const recentActivity = React.useMemo(() => {
+    const activities = [];
+    
+    // Add recent reports
+    reports.slice(0, 3).forEach(report => {
+      activities.push({
+        id: `report-${report._id}`,
+        action: `Rapport "${report.title}" ajouté`,
+        date: new Date(report.createdAt).toLocaleDateString('fr-FR')
+      });
+    });
+    
+    // Add recent donations
+    donations.slice(0, 3).forEach(donation => {
+      const amount = donation.type === 'financial' ? ` de ${donation.amount}$` : '';
+      activities.push({
+        id: `donation-${donation._id}`,
+        action: `Don${amount} reçu de ${donation.donorName}`,
+        date: new Date(donation.createdAt).toLocaleDateString('fr-FR')
+      });
+    });
+    
+    // Sort by date (most recent first) and take only 4 items
+    return activities
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 4);
+  }, [reports, donations]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -173,7 +193,9 @@ const Dashboard: React.FC = () => {
                   <FileText className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{reports.length}</div>
+                  <div className="text-2xl font-bold">
+                    {reportsLoading ? '...' : reports.length}
+                  </div>
                   <p className="text-xs text-muted-foreground">Mis à jour en temps réel</p>
                 </CardContent>
               </Card>
@@ -186,8 +208,12 @@ const Dashboard: React.FC = () => {
                   <DollarSign className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">$8,400</div>
-                  <p className="text-xs text-muted-foreground">+18% depuis le dernier mois</p>
+                  <div className="text-2xl font-bold">
+                    {statsLoading ? '...' : `$${stats?.totalDonations || 0}`}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {statsLoading ? '...' : `${stats?.monthlyGrowth > 0 ? '+' : ''}${stats?.monthlyGrowth?.toFixed(1) || 0}% depuis le dernier mois`}
+                  </p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -199,8 +225,12 @@ const Dashboard: React.FC = () => {
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">1,234</div>
-                  <p className="text-xs text-muted-foreground">+7% depuis la semaine dernière</p>
+                  <div className="text-2xl font-bold">
+                    {statsLoading ? '...' : stats?.visitors || 0}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {statsLoading ? '...' : `${stats?.weeklyGrowth > 0 ? '+' : ''}${stats?.weeklyGrowth?.toFixed(1) || 0}% depuis la semaine dernière`}
+                  </p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -227,9 +257,9 @@ const Dashboard: React.FC = () => {
                   </Button>
                 </div>
                 
-                {isLoading ? (
+                {reportsLoading ? (
                   <div className="text-center py-8">Chargement des rapports...</div>
-                ) : error ? (
+                ) : reportsError ? (
                   <div className="text-center py-8 text-red-500">
                     Erreur lors du chargement des rapports. Veuillez réessayer plus tard.
                   </div>
@@ -244,34 +274,36 @@ const Dashboard: React.FC = () => {
                         <motion.div key={report._id} variants={itemVariants}>
                           <Card>
                             <CardHeader>
-                              <CardTitle>{report.title}</CardTitle>
-                              <CardDescription>
-                                {new Date(report.createdAt).toLocaleDateString('fr-FR')}
-                              </CardDescription>
+                              <div className="flex justify-between items-start">
+                                <div className="flex-1">
+                                  <CardTitle className="text-lg">{report.title}</CardTitle>
+                                  <CardDescription>
+                                    {new Date(report.createdAt).toLocaleDateString('fr-FR')}
+                                  </CardDescription>
+                                </div>
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm" 
+                                  onClick={() => handleDeleteReport(report._id!)}
+                                  disabled={deleteReportMutation.isPending}
+                                  className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </div>
                             </CardHeader>
                             <CardContent>
-                              <p className="text-sm text-gray-600">{report.content}</p>
+                              <p className="text-sm text-gray-600 mb-3">{report.content}</p>
                               {report.fileUrl && (
-                                <div className="flex items-center justify-between mt-2">
-                                  <a
-                                    href={`http://localhost:5000${report.fileUrl}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center text-sm text-primary hover:underline"
-                                  >
-                                    <FileText className="mr-1 h-4 w-4" />
-                                    {report.fileName}
-                                  </a>
-                                  <Button 
-                                    variant="ghost" 
-                                    size="sm" 
-                                    onClick={() => handleDeleteReport(report._id)}
-                                    disabled={deleteReportMutation.isPending}
-                                    className="text-red-500 hover:text-red-700"
-                                  >
-                                    <Trash2 className="h-4 w-4" />
-                                  </Button>
-                                </div>
+                                <a
+                                  href={`http://localhost:5000${report.fileUrl}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center text-sm text-primary hover:underline"
+                                >
+                                  <FileText className="mr-1 h-4 w-4" />
+                                  {report.fileName}
+                                </a>
                               )}
                             </CardContent>
                           </Card>
@@ -287,23 +319,31 @@ const Dashboard: React.FC = () => {
               <Card>
                 <CardHeader>
                   <CardTitle>Aperçu des Dons</CardTitle>
-                  <CardDescription>Les dons reçus au cours des 6 derniers mois</CardDescription>
+                  <CardDescription>
+                    {donationsLoading ? 'Chargement...' : `Les dons reçus au cours des derniers mois (${donations.length} dons totaux)`}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="h-80">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart
-                        data={donationData}
-                        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Bar dataKey="amount" fill="#8884d8" />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
+                  {donationsLoading ? (
+                    <div className="h-80 flex items-center justify-center">
+                      <p>Chargement des données de dons...</p>
+                    </div>
+                  ) : (
+                    <div className="h-80">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart
+                          data={donationChartData}
+                          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="name" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="amount" fill="#8884d8" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>
@@ -315,31 +355,41 @@ const Dashboard: React.FC = () => {
                   <CardDescription>Dernières actions sur la plateforme</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <motion.div 
-                    className="space-y-4"
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                  >
-                    {recentActivity.map((activity, index) => (
-                      <motion.div 
-                        key={activity.id}
-                        variants={itemVariants}
-                        className="flex items-start space-x-4"
-                      >
-                        <div className="mt-1 bg-primary/10 p-2 rounded-full">
-                          <Activity className="h-4 w-4 text-primary" />
+                  {reportsLoading || donationsLoading ? (
+                    <div className="text-center py-8">Chargement de l'activité récente...</div>
+                  ) : (
+                    <motion.div 
+                      className="space-y-4"
+                      variants={containerVariants}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      {recentActivity.length === 0 ? (
+                        <div className="text-center py-8 text-gray-500">
+                          Aucune activité récente disponible.
                         </div>
-                        <div className="flex-1">
-                          <p className="text-sm font-medium">{activity.action}</p>
-                          <p className="text-xs text-gray-500 flex items-center mt-1">
-                            <Calendar className="h-3 w-3 mr-1" />
-                            {activity.date}
-                          </p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </motion.div>
+                      ) : (
+                        recentActivity.map((activity, index) => (
+                          <motion.div 
+                            key={activity.id}
+                            variants={itemVariants}
+                            className="flex items-start space-x-4"
+                          >
+                            <div className="mt-1 bg-primary/10 p-2 rounded-full">
+                              <Activity className="h-4 w-4 text-primary" />
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-sm font-medium">{activity.action}</p>
+                              <p className="text-xs text-gray-500 flex items-center mt-1">
+                                <Calendar className="h-3 w-3 mr-1" />
+                                {activity.date}
+                              </p>
+                            </div>
+                          </motion.div>
+                        ))
+                      )}
+                    </motion.div>
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>
