@@ -62,8 +62,10 @@ const DonationSection: React.FC = () => {
   const handlePaymentSubmit = () => {
     setIsProcessing(true);
     
+    const donationType: "financial" | "other" = activeTab === "financial" ? "financial" : "other";
+    
     const donationData = {
-      type: activeTab === "financial" ? "financial" : "other",
+      type: donationType,
       amount: activeTab === "financial" ? selectedAmount : undefined,
       donorName: (document.getElementById('name') as HTMLInputElement)?.value || 'Anonymous',
       description: (document.getElementById('details') as HTMLTextAreaElement)?.value,
