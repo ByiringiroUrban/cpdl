@@ -36,13 +36,13 @@ const ContactForm: React.FC = () => {
     console.log('Form data:', data);
     
     // Simulate form submission
-    toast.success('Your message has been sent successfully! We will get back to you soon.');
+    toast.success(t('contact.form.success'));
     form.reset();
   };
   
   return (
     <div className="bg-white p-8 rounded-lg shadow-md">
-      <h3 className="text-2xl font-semibold mb-6 text-gray-800">Send Us a Message</h3>
+      <h3 className="text-2xl font-semibold mb-6 text-gray-800">{t('contact.send.message')}</h3>
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -52,9 +52,9 @@ const ContactForm: React.FC = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>{t('contact.form.name')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your name" {...field} />
+                    <Input placeholder={t('contact.form.name.placeholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -66,9 +66,9 @@ const ContactForm: React.FC = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t('contact.form.email')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your email address" {...field} />
+                    <Input placeholder={t('contact.form.email.placeholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -81,9 +81,9 @@ const ContactForm: React.FC = () => {
             name="subject"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Subject</FormLabel>
+                <FormLabel>{t('contact.form.subject')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Subject of your message" {...field} />
+                  <Input placeholder={t('contact.form.subject.placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -95,10 +95,10 @@ const ContactForm: React.FC = () => {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Message</FormLabel>
+                <FormLabel>{t('contact.form.message')}</FormLabel>
                 <FormControl>
                   <Textarea 
-                    placeholder="Your message" 
+                    placeholder={t('contact.form.message.placeholder')} 
                     className="min-h-32" 
                     {...field} 
                   />
@@ -109,7 +109,7 @@ const ContactForm: React.FC = () => {
           />
           
           <Button type="submit" className="w-full">
-            Send Message
+            {t('contact.form.submit')}
           </Button>
         </form>
       </Form>

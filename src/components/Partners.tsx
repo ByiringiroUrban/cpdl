@@ -2,46 +2,49 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import SectionTitle from './SectionTitle';
+import { useLanguage } from '@/context/LanguageContext';
 
 const Partners = () => {
+  const { t } = useLanguage();
+  
   const partners = [
     {
-      name: "United Nations",
+      name: t('partners.un'),
       logo: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
       website: "https://www.un.org"
     },
     {
-      name: "UNICEF",
+      name: t('partners.unicef'),
       logo: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
       website: "https://www.unicef.org"
     },
     {
-      name: "World Health Organization",
+      name: t('partners.who'),
       logo: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
       website: "https://www.who.int"
     },
     {
-      name: "Canadian Red Cross",
+      name: t('partners.redcross'),
       logo: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
       website: "https://www.redcross.ca"
     },
     {
-      name: "Peace Corps",
+      name: t('partners.peacecorps'),
       logo: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
       website: "https://www.peacecorps.gov"
     },
     {
-      name: "Local Community Centers",
+      name: t('partners.community'),
       logo: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
       website: "#"
     },
     {
-      name: "International Development Agency",
+      name: t('partners.ida'),
       logo: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
       website: "#"
     },
     {
-      name: "Global Education Initiative",
+      name: t('partners.education'),
       logo: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200&q=80",
       website: "#"
     }
@@ -51,14 +54,13 @@ const Partners = () => {
     <section className="section-padding bg-gray-50">
       <div className="container-custom">
         <SectionTitle 
-          title="Trusted by Industry Leaders" 
+          title={t('partners.title')} 
           className="mb-16"
         />
         
         <div className="text-center mb-12">
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            We collaborate with renowned organizations and institutions that share our commitment 
-            to making a positive impact in communities worldwide.
+            {t('partners.subtitle')}
           </p>
         </div>
 
@@ -105,8 +107,8 @@ const Partners = () => {
               ))}
             </div>
             <div className="text-left">
-              <p className="text-sm font-semibold text-gray-800">50+ Active Partnerships</p>
-              <p className="text-xs text-gray-600">Growing our impact together</p>
+              <p className="text-sm font-semibold text-gray-800">{t('partners.active')}</p>
+              <p className="text-xs text-gray-600">{t('partners.growing')}</p>
             </div>
           </div>
         </motion.div>

@@ -20,7 +20,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   children, 
   translations 
 }) => {
-  const [language, setLanguage] = useState<Language>('fr'); // Changed default to French
+  const [language, setLanguage] = useState<Language>('fr'); // Default to French
 
   // Set language to French when component mounts
   useEffect(() => {

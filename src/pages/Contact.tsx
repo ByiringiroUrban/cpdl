@@ -18,15 +18,13 @@ const Contact = () => {
       <main className="flex-grow">
         <section className="py-20 bg-gray-50">
           <div className="container-custom">
-            <SectionTitle title={ "Contact Us"} />
+            <SectionTitle title={t('contact.title')} />
             
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-2xl font-semibold mb-6 text-gray-800">Get in Touch</h3>
+                <h3 className="text-2xl font-semibold mb-6 text-gray-800">{t('contact.get.in.touch')}</h3>
                 <p className="text-gray-600 mb-8">
-                  We're here to answer any questions you may have about our organization, 
-                  services, or how you can contribute. Feel free to reach out to us using any 
-                  of the methods below.
+                  {t('contact.intro.text')}
                 </p>
                 
                 <div className="space-y-6">
@@ -35,7 +33,7 @@ const Contact = () => {
                       <Mail className="text-primary" size={22} />
                     </div>
                     <div>
-                      <h4 className="text-sm text-gray-500 font-medium">Email</h4>
+                      <h4 className="text-sm text-gray-500 font-medium">{t('contact.email.label')}</h4>
                       <p className="text-gray-800">cpd.qcca@gmail.com</p>
                       <p className="text-gray-800">pionniersfr@yahoo.fr</p>
                     </div>
@@ -46,7 +44,7 @@ const Contact = () => {
                       <Phone className="text-primary" size={22} />
                     </div>
                     <div>
-                      <h4 className="text-sm text-gray-500 font-medium">Phone</h4>
+                      <h4 className="text-sm text-gray-500 font-medium">{t('contact.phone.label')}</h4>
                       <p className="text-gray-800">+1 438 866 1964</p>
                       <p className="text-gray-800">+1 418 780 7340</p>
                     </div>
@@ -57,7 +55,7 @@ const Contact = () => {
                       <MapPin className="text-primary" size={22} />
                     </div>
                     <div>
-                      <h4 className="text-sm text-gray-500 font-medium">Address</h4>
+                      <h4 className="text-sm text-gray-500 font-medium">{t('contact.address.label')}</h4>
                       <p className="text-gray-800">1901 Avenue Mailloux, Suite 104</p>
                       <p className="text-gray-800">Québec, Québec, Canada, G1J 4Z6</p>
                     </div>
@@ -84,7 +82,7 @@ const Contact = () => {
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
                 className="rounded-lg shadow-md"
-                title="CPD Office Location"
+                title={t('contact.map.title')}
               ></iframe>
             </div>
           </div>

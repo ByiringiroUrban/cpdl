@@ -1,4 +1,3 @@
-
 const translations = {
   // Navigation
   'nav.home': {
@@ -252,46 +251,78 @@ const translations = {
     fr: 'Si vous souhaitez contribuer à nos initiatives sociales, notamment dans le soutien aux personnes âgées et l\'aide aux personnes en difficulté, nous vous encourageons à nous rejoindre en tant que bénévole. Nous visons à aider à répondre aux besoins sociaux par des efforts de charité, de paix et de développement.',
   },
 
-  // Contact Section
+  // Contact Page
   'contact.title': {
     en: 'CONTACT US',
     fr: 'CONTACTEZ-NOUS',
   },
-  'contact.email1': {
-    en: 'Email: pionniersfr@yahoo.fr',
-    fr: 'Email: pionniersfr@yahoo.fr',
+  'contact.get.in.touch': {
+    en: 'Get in Touch',
+    fr: 'Contactez-nous',
   },
-  'contact.email2': {
-    en: 'Email: cpd.qcca@gmail.com',
-    fr: 'Email: cpd.qcca@gmail.com',
+  'contact.intro.text': {
+    en: 'We\'re here to answer any questions you may have about our organization, services, or how you can contribute. Feel free to reach out to us using any of the methods below.',
+    fr: 'Nous sommes là pour répondre à toutes vos questions concernant notre organisation, nos services ou comment vous pouvez contribuer. N\'hésitez pas à nous contacter en utilisant l\'une des méthodes ci-dessous.',
   },
-  'contact.phone': {
-    en: 'Phone (8 a.m. to 2 p.m.): +1 438 866 1964 / +1 418 780 7340',
-    fr: 'Téléphone (8h à 14h): +1 438 866 1964 / +1 418 780 7340',
+  'contact.email.label': {
+    en: 'Email',
+    fr: 'Email',
   },
-  'contact.address': {
-    en: 'Address: 1901 Avenue Mailloux, Suite 104, Québec, Québec, Canada, G1J 4Z6',
-    fr: 'Adresse: 1901 Avenue Mailloux, Suite 104, Québec, Québec, Canada, G1J 4Z6',
+  'contact.phone.label': {
+    en: 'Phone',
+    fr: 'Téléphone',
+  },
+  'contact.address.label': {
+    en: 'Address',
+    fr: 'Adresse',
+  },
+  'contact.map.title': {
+    en: 'CPD Office Location',
+    fr: 'Emplacement du Bureau CPD',
+  },
+  'contact.send.message': {
+    en: 'Send Us a Message',
+    fr: 'Envoyez-nous un Message',
   },
   'contact.form.name': {
     en: 'Name',
     fr: 'Nom',
   },
+  'contact.form.name.placeholder': {
+    en: 'Your name',
+    fr: 'Votre nom',
+  },
   'contact.form.email': {
     en: 'Email',
     fr: 'Email',
   },
+  'contact.form.email.placeholder': {
+    en: 'Your email address',
+    fr: 'Votre adresse email',
+  },
+  'contact.form.subject': {
+    en: 'Subject',
+    fr: 'Sujet',
+  },
+  'contact.form.subject.placeholder': {
+    en: 'Subject of your message',
+    fr: 'Sujet de votre message',
+  },
   'contact.form.message': {
     en: 'Message',
     fr: 'Message',
+  },
+  'contact.form.message.placeholder': {
+    en: 'Your message',
+    fr: 'Votre message',
   },
   'contact.form.submit': {
     en: 'Send Message',
     fr: 'Envoyer le Message',
   },
   'contact.form.success': {
-    en: 'Your message has been sent. We will get back to you soon!',
-    fr: 'Votre message a été envoyé. Nous vous répondrons bientôt!',
+    en: 'Your message has been sent successfully! We will get back to you soon.',
+    fr: 'Votre message a été envoyé avec succès! Nous vous répondrons bientôt.',
   },
 
   // News Section
@@ -476,7 +507,57 @@ const translations = {
     fr: 'Payer Maintenant',
   },
 
-  // Common
+  // Partners Section
+  'partners.title': {
+    en: 'Trusted by Industry Leaders',
+    fr: 'Approuvé par les Leaders de l\'Industrie',
+  },
+  'partners.subtitle': {
+    en: 'We collaborate with renowned organizations and institutions that share our commitment to making a positive impact in communities worldwide.',
+    fr: 'Nous collaborons avec des organisations et institutions renommées qui partagent notre engagement à avoir un impact positif dans les communautés du monde entier.',
+  },
+  'partners.active': {
+    en: '50+ Active Partnerships',
+    fr: '50+ Partenariats Actifs',
+  },
+  'partners.growing': {
+    en: 'Growing our impact together',
+    fr: 'Augmenter notre impact ensemble',
+  },
+  'partners.un': {
+    en: 'United Nations',
+    fr: 'Nations Unies',
+  },
+  'partners.unicef': {
+    en: 'UNICEF',
+    fr: 'UNICEF',
+  },
+  'partners.who': {
+    en: 'World Health Organization',
+    fr: 'Organisation Mondiale de la Santé',
+  },
+  'partners.redcross': {
+    en: 'Canadian Red Cross',
+    fr: 'Croix-Rouge Canadienne',
+  },
+  'partners.peacecorps': {
+    en: 'Peace Corps',
+    fr: 'Corps de la Paix',
+  },
+  'partners.community': {
+    en: 'Local Community Centers',
+    fr: 'Centres Communautaires Locaux',
+  },
+  'partners.ida': {
+    en: 'International Development Agency',
+    fr: 'Agence de Développement International',
+  },
+  'partners.education': {
+    en: 'Global Education Initiative',
+    fr: 'Initiative d\'Éducation Mondiale',
+  },
+
+  // Common translations
   'common.cancel': {
     en: 'Cancel',
     fr: 'Annuler',
@@ -487,7 +568,7 @@ const translations = {
   },
   'common.processing': {
     en: 'Processing...',
-    fr: 'Traitement en cours',
+    fr: 'Traitement en cours...',
   },
 
   // Dashboard
