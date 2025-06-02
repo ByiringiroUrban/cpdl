@@ -8,6 +8,7 @@ import ContactInfo from '@/components/ContactInfo';
 import TeamMember from '@/components/TeamMember';
 import AchievementCard from '@/components/AchievementCard';
 import DonationSection from '@/components/DonationSection';
+import Partners from '@/components/Partners';
 import ReportsSection from './ReportsSection';
 import { motion } from 'framer-motion';
 import { Globe, Users, Book, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -235,6 +236,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+        
+        {/* Partners Section - NEW */}
+        <Partners />
         
         {/* Achievements Section */}
         <section id="achievements" className="section-padding bg-gray-400">
