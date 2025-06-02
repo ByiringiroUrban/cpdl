@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -46,7 +47,7 @@ const DonationSection: React.FC = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['donations', 'stats'] });
       setIsDialogOpen(false);
-      toast.success("Merci pour votre don!");
+      toast.success(t('donation.success'));
     }
   });
   
@@ -83,17 +84,17 @@ const DonationSection: React.FC = () => {
   };
   
   const paymentMethods = [
-    { id: "card", name: "Carte de Crédit", description: "Payer avec Visa, Mastercard, ou American Express" },
-    { id: "paypal", name: "PayPal", description: "Paiement rapide et sécurisé avec PayPal" },
-    { id: "momo", name: "Mobile Money", description: "Payer via un transfert par Mobile Money" },
+    { id: "card", name: t('donation.payment.card'), description: t('donation.payment.card.desc') },
+    { id: "paypal", name: t('donation.payment.paypal'), description: t('donation.payment.paypal.desc') },
+    { id: "momo", name: t('donation.payment.momo'), description: t('donation.payment.momo.desc') },
   ];
 
   const otherDonationTypes = [
-    { id: "material", name: t('donation.material'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: "Faites don de matériel dont vous n'avez plus besoin" },
-    { id: "volunteer", name: t('donation.volunteer'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: "Donnez de votre temps pour aider nos initiatives" },
-    { id: "services", name: t('donation.services'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: "Offrez vos compétences professionnelles" },
-    { id: "food", name: t('donation.food'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: "Contribuez avec des dons alimentaires" },
-    { id: "clothes", name: t('donation.clothes'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: "Donnez des vêtements en bon état" },
+    { id: "material", name: t('donation.material'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.material.desc') },
+    { id: "volunteer", name: t('donation.volunteer'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.volunteer.desc') },
+    { id: "services", name: t('donation.services'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.services.desc') },
+    { id: "food", name: t('donation.food'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.food.desc') },
+    { id: "clothes", name: t('donation.clothes'), icon: <Gift className="h-8 w-8 text-primary mb-4" />, description: t('donation.clothes.desc') },
   ];
 
   return (
@@ -122,20 +123,20 @@ const DonationSection: React.FC = () => {
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full max-w-4xl mx-auto">
           <TabsList className="grid grid-cols-2 mb-8">
-            <TabsTrigger value="financial">Dons Financiers</TabsTrigger>
+            <TabsTrigger value="financial">{t('donation.financial')}</TabsTrigger>
             <TabsTrigger value="other">{t('donation.other')}</TabsTrigger>
           </TabsList>
           
           <TabsContent value="financial">
             <div className="text-center mb-8">
               <p className="text-gray-600 mb-4">
-                Soutenez notre mission avec un don personnalisé
+                {t('donation.financial.subtitle')}
               </p>
               <Button 
                 onClick={handleDonationClick}
                 className="mx-auto"
               >
-                <Heart className="mr-2 h-4 w-4" /> Faire un Don
+                <Heart className="mr-2 h-4 w-4" /> {t('donation.button')}
               </Button>
             </div>
           </TabsContent>
@@ -169,7 +170,7 @@ const DonationSection: React.FC = () => {
                         className="w-full"
                         onClick={() => handleOtherDonationClick(type.id)}
                       >
-                        En savoir plus
+                        {t('donation.learn.more')}
                       </Button>
                     </CardFooter>
                   </Card>
@@ -186,20 +187,20 @@ const DonationSection: React.FC = () => {
           <DialogHeader>
             <DialogTitle>
               {activeTab === "financial" 
-                ? "Sélectionnez votre méthode de paiement" 
-                : `Faire un don de ${selectedDonationType}`}
+                ? t('donation.dialog.payment.title')
+                : t('donation.dialog.other.title', { type: selectedDonationType })}
             </DialogTitle>
             <DialogDescription>
               {activeTab === "financial" 
-                ? "Choisissez votre méthode de paiement et le montant de votre don." 
-                : "Veuillez remplir le formulaire ci-dessous pour nous indiquer votre intention de don."}
+                ? t('donation.dialog.payment.desc')
+                : t('donation.dialog.other.desc')}
             </DialogDescription>
           </DialogHeader>
           
           {activeTab === "financial" && (
             <>
               <div className="mb-4">
-                <Label htmlFor="custom-amount">Montant du don ($)</Label>
+                <Label htmlFor="custom-amount">{t('donation.amount.label')}</Label>
                 <div className="relative mt-1">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <span className="text-gray-500 sm:text-sm">$</span>
@@ -209,7 +210,7 @@ const DonationSection: React.FC = () => {
                     name="custom-amount"
                     id="custom-amount"
                     className="w-full pl-7 pr-12 py-2 border border-gray-300 rounded-md"
-                    placeholder="Entrez le montant"
+                    placeholder={t('donation.amount.placeholder')}
                     min="1"
                     step="1"
                     onChange={(e) => setSelectedAmount(Number(e.target.value))}
@@ -238,30 +239,30 @@ const DonationSection: React.FC = () => {
           {activeTab === "other" && (
             <div className="space-y-4">
               <div>
-                <Label htmlFor="name">Nom</Label>
+                <Label htmlFor="name">{t('contact.form.name')}</Label>
                 <input
                   type="text"
                   id="name"
                   className="w-full py-2 px-3 border border-gray-300 rounded-md"
-                  placeholder="Votre nom"
+                  placeholder={t('donation.form.name.placeholder')}
                 />
               </div>
               <div>
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('contact.form.email')}</Label>
                 <input
                   type="email"
                   id="email"
                   className="w-full py-2 px-3 border border-gray-300 rounded-md"
-                  placeholder="Votre email"
+                  placeholder={t('donation.form.email.placeholder')}
                 />
               </div>
               <div>
-                <Label htmlFor="details">Détails du don</Label>
+                <Label htmlFor="details">{t('donation.form.details')}</Label>
                 <textarea
                   id="details"
                   className="w-full py-2 px-3 border border-gray-300 rounded-md"
                   rows={3}
-                  placeholder="Décrivez votre don (type, quantité, etc.)"
+                  placeholder={t('donation.form.details.placeholder')}
                 ></textarea>
               </div>
             </div>
@@ -273,7 +274,7 @@ const DonationSection: React.FC = () => {
               onClick={() => setIsDialogOpen(false)}
               disabled={isProcessing}
             >
-              Annuler
+              {t('common.cancel')}
             </Button>
             <Button 
               onClick={handlePaymentSubmit}
@@ -282,17 +283,17 @@ const DonationSection: React.FC = () => {
             >
               {isProcessing ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Traitement en cours
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t('common.processing')}
                 </>
               ) : (
                 <>
                   {activeTab === "financial" ? (
                     <>
-                      <CreditCard className="mr-2 h-4 w-4" /> Payer Maintenant
+                      <CreditCard className="mr-2 h-4 w-4" /> {t('donation.pay.now')}
                     </>
                   ) : (
                     <>
-                      <Check className="mr-2 h-4 w-4" /> Soumettre
+                      <Check className="mr-2 h-4 w-4" /> {t('common.submit')}
                     </>
                   )}
                 </>

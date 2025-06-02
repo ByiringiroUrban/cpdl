@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import Navbar from '@/components/Navbar';
@@ -109,7 +110,7 @@ const Index = () => {
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                  Nous Approches
+                  {t('presentation.contact.button')}
           </motion.a>
           </div>
         </section>
@@ -198,7 +199,7 @@ const Index = () => {
               <div>
                 <p className="text-gray-400 mb-4">{t('fields.content')}</p>
                 <p className="text-gray-400">
-                  The Colony of Development Pioneers' scope of action is the entire territory of Quebec, in Canada and abroad where its objectives are justified. In Africa, activities are concentrated in the Democratic Republic of Congo and Burundi.
+                  {t('fields.scope')}
                 </p>
               </div>
             </div>
@@ -263,29 +264,29 @@ const Index = () => {
         {/* Activities Section - New Section */}
         <section id="activities" className="section-padding bg-gray-50">
           <div className="container-custom">
-            <SectionTitle title="ACTIVITIES" />
+            <SectionTitle title={t('activities.title')} />
             <div className="max-w-4xl mx-auto">
               <div className="space-y-6">
                 <p className="text-gray-700">
-                  Support and assist elderly people and immigrants in need of assistance. To combat loneliness and maintain and promote human warmth among elderly people, the CPD organizes cultural activities for them and facilitates the provision of caregivers when needed.
+                  {t('activities.1')}
                 </p>
                 <p className="text-gray-700">
-                  Prevent, combat and fight against armed violence, violence against women.
+                  {t('activities.2')}
                 </p>
                 <p className="text-gray-700">
-                  Raise awareness, train and support young people on peace, respect for human rights and against drug use through information and awareness-raising activities.
+                  {t('activities.3')}
                 </p>
                 <p className="text-gray-700">
-                  Advocacy for the implementation of international conventions, protocols and treaties aimed at building and consolidating peace, respect for human and humanitarian rights and sustainable development.
+                  {t('activities.4')}
                 </p>
                 <p className="text-gray-700">
-                  Supervise young people on cross-cutting themes for sustainable development around French clubs.
+                  {t('activities.5')}
                 </p>
                 <p className="text-gray-700">
-                  Contribute to preventing, eradicating and combating violence and violations of the rights of vulnerable and minority people such as victims of conflict, LGBTQI+ people, and people with disabilities.
+                  {t('activities.6')}
                 </p>
                 <p className="text-gray-700">
-                  Support populations in need of assistance with socio-economic development initiatives, by applying a policy of support for agriculture and livestock farming.
+                  {t('activities.7')}
                 </p>
               </div>
             </div>

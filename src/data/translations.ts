@@ -1,3 +1,4 @@
+
 const translations = {
   // Navigation
   'nav.home': {
@@ -60,6 +61,10 @@ const translations = {
     en: 'The organization\'s motto is: "Solidarity, Peace, and Development for All."',
     fr: 'La devise de l\'organisation est : "Solidarité, Paix et Développement pour Tous."',
   },
+  'presentation.contact.button': {
+    en: 'Contact Us',
+    fr: 'Nous Approches',
+  },
 
   // Objectives Section
   'objectives.title': {
@@ -114,6 +119,10 @@ const translations = {
     en: 'CPD\'s activities are spread across Quebec, Canada, and internationally, where its objectives are applicable. In Africa, activities focus on the Democratic Republic of Congo (DRC) and Burundi.',
     fr: 'Les activités de la CPD s\'étendent au Québec, au Canada et à l\'international, où ses objectifs sont applicables. En Afrique, les activités se concentrent sur la République démocratique du Congo (RDC) et le Burundi.',
   },
+  'fields.scope': {
+    en: 'The Colony of Development Pioneers\' scope of action is the entire territory of Quebec, in Canada and abroad where its objectives are justified. In Africa, activities are concentrated in the Democratic Republic of Congo and Burundi.',
+    fr: 'Le champ d\'action de la Colonie des Pionniers du Développement est l\'ensemble du territoire du Québec, au Canada et à l\'étranger où ses objectifs sont justifiés. En Afrique, les activités sont concentrées en République démocratique du Congo et au Burundi.',
+  },
 
   // Team Section
   'team.title': {
@@ -123,6 +132,40 @@ const translations = {
   'team.jacques': {
     en: 'Mr. Jacques Ntibarikure: General Coordinator and Head of the Peace and Human Security thematic sector',
     fr: 'M. Jacques Ntibarikure : Coordinateur général et Chef du secteur thématique Paix et Sécurité humaine',
+  },
+
+  // Activities Section
+  'activities.title': {
+    en: 'ACTIVITIES',
+    fr: 'ACTIVITÉS',
+  },
+  'activities.1': {
+    en: 'Support and assist elderly people and immigrants in need of assistance. To combat loneliness and maintain and promote human warmth among elderly people, the CPD organizes cultural activities for them and facilitates the provision of caregivers when needed.',
+    fr: 'Soutenir et assister les personnes âgées et les immigrants ayant besoin d\'assistance. Pour lutter contre la solitude et maintenir et promouvoir la chaleur humaine parmi les personnes âgées, la CPD organise des activités culturelles pour eux et facilite la fourniture d\'aidants quand c\'est nécessaire.',
+  },
+  'activities.2': {
+    en: 'Prevent, combat and fight against armed violence, violence against women.',
+    fr: 'Prévenir, combattre et lutter contre la violence armée, la violence contre les femmes.',
+  },
+  'activities.3': {
+    en: 'Raise awareness, train and support young people on peace, respect for human rights and against drug use through information and awareness-raising activities.',
+    fr: 'Sensibiliser, former et soutenir les jeunes sur la paix, le respect des droits humains et contre l\'usage de drogues par des activités d\'information et de sensibilisation.',
+  },
+  'activities.4': {
+    en: 'Advocacy for the implementation of international conventions, protocols and treaties aimed at building and consolidating peace, respect for human and humanitarian rights and sustainable development.',
+    fr: 'Plaidoyer pour la mise en œuvre de conventions, protocoles et traités internationaux visant à construire et consolider la paix, le respect des droits humains et humanitaires et le développement durable.',
+  },
+  'activities.5': {
+    en: 'Supervise young people on cross-cutting themes for sustainable development around French clubs.',
+    fr: 'Superviser les jeunes sur des thèmes transversaux pour le développement durable autour des clubs français.',
+  },
+  'activities.6': {
+    en: 'Contribute to preventing, eradicating and combating violence and violations of the rights of vulnerable and minority people such as victims of conflict, LGBTQI+ people, and people with disabilities.',
+    fr: 'Contribuer à prévenir, éradiquer et combattre la violence et les violations des droits des personnes vulnérables et minoritaires telles que les victimes de conflits, les personnes LGBTQI+ et les personnes handicapées.',
+  },
+  'activities.7': {
+    en: 'Support populations in need of assistance with socio-economic development initiatives, by applying a policy of support for agriculture and livestock farming.',
+    fr: 'Soutenir les populations ayant besoin d\'assistance avec des initiatives de développement socio-économique, en appliquant une politique de soutien à l\'agriculture et à l\'élevage.',
   },
 
   // Achievements Section
@@ -304,6 +347,14 @@ const translations = {
     en: 'Donate Now',
     fr: 'Faire un don maintenant',
   },
+  'donation.financial': {
+    en: 'Financial Donations',
+    fr: 'Dons Financiers',
+  },
+  'donation.financial.subtitle': {
+    en: 'Support our mission with a personalized donation',
+    fr: 'Soutenez notre mission avec un don personnalisé',
+  },
   'donation.other': {
     en: 'Other Donation Types',
     fr: 'Autres Types de Dons',
@@ -312,21 +363,131 @@ const translations = {
     en: 'Material Donations',
     fr: 'Dons Matériels',
   },
+  'donation.material.desc': {
+    en: 'Donate materials you no longer need',
+    fr: 'Faites don de matériel dont vous n\'avez plus besoin',
+  },
   'donation.volunteer': {
     en: 'Volunteer Time',
     fr: 'Temps Bénévole',
+  },
+  'donation.volunteer.desc': {
+    en: 'Give your time to help our initiatives',
+    fr: 'Donnez de votre temps pour aider nos initiatives',
   },
   'donation.services': {
     en: 'Professional Services',
     fr: 'Services Professionnels',
   },
+  'donation.services.desc': {
+    en: 'Offer your professional skills',
+    fr: 'Offrez vos compétences professionnelles',
+  },
   'donation.food': {
     en: 'Food Donations',
     fr: 'Dons Alimentaires',
   },
+  'donation.food.desc': {
+    en: 'Contribute with food donations',
+    fr: 'Contribuez avec des dons alimentaires',
+  },
   'donation.clothes': {
     en: 'Clothing Donations',
     fr: 'Dons de Vêtements',
+  },
+  'donation.clothes.desc': {
+    en: 'Donate clothes in good condition',
+    fr: 'Donnez des vêtements en bon état',
+  },
+  'donation.learn.more': {
+    en: 'Learn More',
+    fr: 'En savoir plus',
+  },
+  'donation.success': {
+    en: 'Thank you for your donation!',
+    fr: 'Merci pour votre don!',
+  },
+  'donation.dialog.payment.title': {
+    en: 'Select your payment method',
+    fr: 'Sélectionnez votre méthode de paiement',
+  },
+  'donation.dialog.payment.desc': {
+    en: 'Choose your payment method and donation amount.',
+    fr: 'Choisissez votre méthode de paiement et le montant de votre don.',
+  },
+  'donation.dialog.other.title': {
+    en: 'Make a donation of {type}',
+    fr: 'Faire un don de {type}',
+  },
+  'donation.dialog.other.desc': {
+    en: 'Please fill out the form below to indicate your donation intention.',
+    fr: 'Veuillez remplir le formulaire ci-dessous pour nous indiquer votre intention de don.',
+  },
+  'donation.amount.label': {
+    en: 'Donation Amount ($)',
+    fr: 'Montant du don ($)',
+  },
+  'donation.amount.placeholder': {
+    en: 'Enter amount',
+    fr: 'Entrez le montant',
+  },
+  'donation.payment.card': {
+    en: 'Credit Card',
+    fr: 'Carte de Crédit',
+  },
+  'donation.payment.card.desc': {
+    en: 'Pay with Visa, Mastercard, or American Express',
+    fr: 'Payer avec Visa, Mastercard, ou American Express',
+  },
+  'donation.payment.paypal': {
+    en: 'PayPal',
+    fr: 'PayPal',
+  },
+  'donation.payment.paypal.desc': {
+    en: 'Quick and secure payment with PayPal',
+    fr: 'Paiement rapide et sécurisé avec PayPal',
+  },
+  'donation.payment.momo': {
+    en: 'Mobile Money',
+    fr: 'Mobile Money',
+  },
+  'donation.payment.momo.desc': {
+    en: 'Pay via Mobile Money transfer',
+    fr: 'Payer via un transfert par Mobile Money',
+  },
+  'donation.form.name.placeholder': {
+    en: 'Your name',
+    fr: 'Votre nom',
+  },
+  'donation.form.email.placeholder': {
+    en: 'Your email',
+    fr: 'Votre email',
+  },
+  'donation.form.details': {
+    en: 'Donation Details',
+    fr: 'Détails du don',
+  },
+  'donation.form.details.placeholder': {
+    en: 'Describe your donation (type, quantity, etc.)',
+    fr: 'Décrivez votre don (type, quantité, etc.)',
+  },
+  'donation.pay.now': {
+    en: 'Pay Now',
+    fr: 'Payer Maintenant',
+  },
+
+  // Common
+  'common.cancel': {
+    en: 'Cancel',
+    fr: 'Annuler',
+  },
+  'common.submit': {
+    en: 'Submit',
+    fr: 'Soumettre',
+  },
+  'common.processing': {
+    en: 'Processing...',
+    fr: 'Traitement en cours',
   },
 
   // Dashboard
