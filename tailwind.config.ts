@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b
 import type { Config } from "tailwindcss";
 
 export default {
@@ -29,13 +26,8 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-<<<<<<< HEAD
 					DEFAULT: '#00FFFF', // Aqua color
 					foreground: '#003333', // Dark text for contrast
-=======
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -50,13 +42,8 @@ export default {
 					foreground: 'hsl(var(--muted-foreground))'
 				},
 				accent: {
-<<<<<<< HEAD
 					DEFAULT: '#E6FFFF', // Light aqua accent
 					foreground: '#003333', // Dark text for contrast
-=======
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
->>>>>>> 3e5b774c6cad6899b2b08a59b3eb18e7416edb8b
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
